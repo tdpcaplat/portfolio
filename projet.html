@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thierry Caplat — Projets par marque</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-alt:#EEF3F3;
+    --ink:#33383D;
+    --ink-muted:#70767B;
+    --accent:#3A949E;
+    --accent-2:#256169;
+    --line: rgba(51,56,61,0.14);
+  }
+  body.lang-en{
+    --bg:#1B2226;
+    --bg-alt:#222B30;
+    --ink:#F2F5F5;
+    --ink-muted:#9FB0B3;
+    --line: rgba(242,245,245,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;transition:background-color .45s ease, color .45s ease, border-color .45s ease;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Work Sans', sans-serif;font-weight:300;line-height:1.6;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 32px;}
+  body.lang-fr .en{display:none;}
+  body.lang-en .fr{display:none;}
+
+  header{padding:26px 0;border-bottom:1px solid var(--line);}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;}
+  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;}
+  .logo span{color:var(--accent);}
+  .back{
+    font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;
+    color:var(--ink-muted);display:flex;align-items:center;gap:8px;transition:color .2s;
+  }
+  .back:hover{color:var(--ink);}
+  .lang-switch{
+    font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.06em;
+    display:flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  }
+  .lang-switch button{background:none;border:none;color:var(--ink-muted);padding:6px 14px;cursor:pointer;font-family:inherit;font-size:inherit;transition:color .2s, background .2s;}
+  .lang-switch button.active{background:var(--accent);color:#FFFFFF;}
+  .header-inner{display:flex;align-items:center;gap:32px;}
+
+  .brand-hero{padding:100px 0 70px;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--accent);}
+  h1{font-family:'Fraunces', serif;font-weight:500;font-size:clamp(38px, 6vw, 72px);line-height:1.05;max-width:820px;}
+  .brand-meta{
+    display:flex;gap:48px;flex-wrap:wrap;margin-top:36px;
+    font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-muted);
+  }
+  .brand-meta strong{display:block;color:var(--ink);font-size:14px;margin-bottom:4px;font-family:'Work Sans',sans-serif;font-weight:500;}
+  .brand-desc{max-width:640px;margin-top:28px;color:var(--ink-muted);font-size:17px;}
+
+  section{padding:80px 0;}
+  .section-label{
+    font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--accent);display:flex;align-items:baseline;gap:14px;margin-bottom:40px;
+  }
+  .section-label .rule{flex:1;height:1px;background:var(--line);}
+
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .gallery-item{
+    aspect-ratio:4/3;border-radius:4px;overflow:hidden;position:relative;
+    background:var(--bg-alt);border:1px solid var(--line);
+  }
+  .gallery-item img, .gallery-item video{width:100%;height:100%;object-fit:cover;display:block;}
+  .placeholder{
+    width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;color:var(--ink-muted);text-align:center;padding:20px;
+    border:1px dashed var(--line);
+  }
+  .placeholder .plus{font-family:'Fraunces', serif;font-size:32px;color:var(--accent);}
+  .placeholder small{font-family:'IBM Plex Mono', monospace;font-size:10px;letter-spacing:0.04em;max-width:200px;}
+
+  .brand-switch{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+  .brand-switch a{
+    font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-muted);
+    border:1px solid var(--line);border-radius:16px;padding:7px 14px;transition:color .2s, border-color .2s;
+  }
+  .brand-switch a.active{color:var(--accent);border-color:var(--accent);}
+  .brand-switch a:hover{color:var(--ink);}
+
+  footer{padding:32px 0;font-family:'IBM Plex Mono', monospace;font-size:11px;color:var(--ink-muted);
+    display:flex;justify-content:space-between;border-top:1px solid var(--line);}
+
+  @media (max-width:760px){
+    .gallery{grid-template-columns:1fr 1fr;}
+    .header-inner{gap:16px;}
+  }
+  @media (max-width:520px){
+    .gallery{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body class="lang-fr">
+
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <div class="logo">THIERRY<span>·</span>CAPLAT</div>
+      <a class="back" href="index.html">← <span class="fr">Retour au portfolio</span><span class="en">Back to portfolio</span></a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Langue / Language">
+      <button type="button" class="active" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<section class="brand-hero">
+  <div class="wrap">
+    <div class="eyebrow" id="brand-eyebrow"></div>
+    <h1 id="brand-title"></h1>
+    <p class="brand-desc" id="brand-desc"></p>
+    <div class="brand-meta" id="brand-meta"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label"><span class="fr">Visuels du projet</span><span class="en">Project visuals</span><div class="rule"></div></div>
+    <div class="gallery" id="gallery"></div>
+
+    <div class="section-label" style="margin-top:64px;"><span class="fr">Autres marques</span><span class="en">Other brands</span><div class="rule"></div></div>
+    <div class="brand-switch" id="brand-switch"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:center;width:100%;">
+    <span>© 2026 Thierry Caplat</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   POUR AJOUTER TES PROPRES IMAGES / VIDEOS :
+   1. Copie tes fichiers (photos, vidéos) dans un dossier "medias/"
+      placé au même endroit que ce fichier projet.html.
+   2. Dans l'objet BRANDS ci-dessous, remplace src:"" par le chemin
+      du fichier, ex : src:"medias/loreal-packshot-1.jpg"
+   3. type peut valoir "image" ou "video".
+   4. Tu peux ajouter ou supprimer des éléments dans le tableau
+      "media" de chaque marque, il n'y a pas de limite.
+   Les cases avec un "+" sont des emplacements vides en attente
+   de tes fichiers : elles n'affichent rien de cassé, juste une
+   invitation à compléter.
+   ============================================================ */
+
+const BRANDS = {
+  loreal: {
+    eyebrow: { fr: "L'Oréal — La Roche-Posay / Vichy", en: "L'Oréal — La Roche-Posay / Vichy" },
+    title: { fr: "Packaging L'Oréal", en: "L'Oréal packaging" },
+    desc: {
+      fr: "Studio packaging de 5 designers seniors pour les marques La Roche-Posay et Vichy chez SGXgraphics : plus de 1 000 projets par an, 98 % de satisfaction client.",
+      en: "5-designer packaging studio for La Roche-Posay and Vichy at SGXgraphics: over 1,000 projects a year, 98% client satisfaction."
+    },
+    meta: [
+      { fr: "Rôle", en: "Role", value: { fr: "Senior Studio Manager", en: "Senior Studio Manager" } },
+      { fr: "Période", en: "Period", value: { fr: "2024 — présent", en: "2024 — present" } },
+      { fr: "Agence", en: "Agency", value: { fr: "SGXgraphics, Paris", en: "SGXgraphics, Paris" } }
+    ],
+    media: [
+      { type: "image", src: "", caption: { fr: "Packshot La Roche-Posay", en: "La Roche-Posay packshot" } },
+      { type: "image", src: "medias/vichy-liftactiv-collagen.png", caption: { fr: "Vichy LiftActiv Collagen Specialist", en: "Vichy LiftActiv Collagen Specialist" } },
+      { type: "video", src: "", caption: { fr: "Making-of studio", en: "Studio making-of" } }
+    ]
+  },
+  optic2000: {
+    eyebrow: { fr: "Optic 2000 / Lissac / Gadol / Audio 2000", en: "Optic 2000 / Lissac / Gadol / Audio 2000" },
+    title: { fr: "Identité visuelle Optic 2000", en: "Optic 2000 brand identity" },
+    desc: {
+      fr: "Pilotage de la production graphique pour les enseignes Optic 2000, Lissac, Gadol et Audio 2000 : identité visuelle, campagnes intégrées, encadrement de 4 designers.",
+      en: "Led graphic production for the Optic 2000, Lissac, Gadol and Audio 2000 retail networks: brand identity, integrated campaigns, team of 4 designers."
+    },
+    meta: [
+      { fr: "Rôle", en: "Role", value: { fr: "Traffic Studio Manager", en: "Traffic Studio Manager" } },
+      { fr: "Période", en: "Period", value: { fr: "2016 — 2024", en: "2016 — 2024" } },
+      { fr: "Agence", en: "Agency", value: { fr: "Audioptic Trade Services, Clamart", en: "Audioptic Trade Services, Clamart" } }
+    ],
+    media: [
+      { type: "image", src: "", caption: { fr: "PLV magasin", en: "In-store POS display" } },
+      { type: "image", src: "", caption: { fr: "Campagne presse", en: "Press campaign" } },
+      { type: "image", src: "", caption: { fr: "Signalétique", en: "Signage" } }
+    ]
+  },
+  pfizer: {
+    eyebrow: { fr: "MSD / Pfizer", en: "MSD / Pfizer" },
+    title: { fr: "Projets pharmaceutiques", en: "Pharmaceutical projects" },
+    desc: {
+      fr: "Direction d'une équipe de 5 designers sur des initiatives clés pour MSD et Pfizer chez Purple Agency, avec un haut niveau d'exigence réglementaire et de satisfaction client.",
+      en: "Led a team of 5 designers on key MSD and Pfizer initiatives at Purple Agency, under strict regulatory requirements and high client satisfaction."
+    },
+    meta: [
+      { fr: "Rôle", en: "Role", value: { fr: "Studio Coordinator", en: "Studio Coordinator" } },
+      { fr: "Période", en: "Period", value: { fr: "2016", en: "2016" } },
+      { fr: "Agence", en: "Agency", value: { fr: "Purple Agency, Paris", en: "Purple Agency, Paris" } }
+    ],
+    media: [
+      { type: "image", src: "", caption: { fr: "Documentation produit", en: "Product documentation" } },
+      { type: "image", src: "", caption: { fr: "Supports congrès", en: "Conference materials" } }
+    ]
+  },
+  unilever: {
+    eyebrow: { fr: "Unilever — Omo & Surf", en: "Unilever — Omo & Surf" },
+    title: { fr: "Packaging Omo & Surf", en: "Omo & Surf packaging" },
+    desc: {
+      fr: "Chef de projet packaging pour les marques Omo et Surf, à la croisée des enjeux créatifs et techniques, au sein d'Unilever Europe.",
+      en: "Packaging project manager for the Omo and Surf brands at Unilever Europe, balancing creative and technical requirements."
+    },
+    meta: [
+      { fr: "Rôle", en: "Role", value: { fr: "Art Production Specialist", en: "Art Production Specialist" } },
+      { fr: "Période", en: "Period", value: { fr: "2011", en: "2011" } },
+      { fr: "Lieu", en: "Location", value: { fr: "Leatherhead, Royaume-Uni", en: "Leatherhead, UK" } }
+    ],
+    media: [
+      { type: "image", src: "", caption: { fr: "Packaging Omo", en: "Omo packaging" } },
+      { type: "image", src: "", caption: { fr: "Packaging Surf", en: "Surf packaging" } }
+    ]
+  },
+  orange: {
+    eyebrow: { fr: "Orange", en: "Orange" },
+    title: { fr: "Magalogue Orange", en: "Orange magalogue" },
+    desc: {
+      fr: "Conception du magalogue Orange chez John Brown Media à Londres, un objet éditorial à la croisée de la marque et de ses utilisateurs.",
+      en: "Designed the Orange magalogue at John Brown Media in London, an editorial object connecting the brand with its users."
+    },
+    meta: [
+      { fr: "Rôle", en: "Role", value: { fr: "Directeur artistique", en: "Art Director" } },
+      { fr: "Période", en: "Period", value: { fr: "2008 — 2009", en: "2008 — 2009" } },
+      { fr: "Agence", en: "Agency", value: { fr: "John Brown Media, Londres", en: "John Brown Media, London" } }
+    ],
+    media: [
+      { type: "image", src: "", caption: { fr: "Couverture du magalogue", en: "Magalogue cover" } },
+      { type: "image", src: "", caption: { fr: "Double page intérieure", en: "Inside spread" } }
+    ]
+  },
+  grandscomptes: {
+    eyebrow: { fr: "Alstom, Areva, Schneider Electric, Kimberly-Clark", en: "Alstom, Areva, Schneider Electric, Kimberly-Clark" },
+    title: { fr: "Grands comptes industriels", en: "Industrial key accounts" },
+    desc: {
+      fr: "Conception de supports de communication print multilingues pour de grands groupes industriels, en freelance chez Creative Works.",
+      en: "Designed multilingual print communication materials for major industrial groups, freelancing at Creative Works."
+    },
+    meta: [
+      { fr: "Rôle", en: "Role", value: { fr: "Directeur artistique freelance", en: "Freelance Art Director" } },
+      { fr: "Période", en: "Period", value: { fr: "2009 — 2011", en: "2009 — 2011" } },
+      { fr: "Agence", en: "Agency", value: { fr: "Creative Works, Epsom (UK)", en: "Creative Works, Epsom (UK)" } }
+    ],
+    media: [
+      { type: "image", src: "", caption: { fr: "Brochure Alstom", en: "Alstom brochure" } },
+      { type: "image", src: "", caption: { fr: "Rapport Areva", en: "Areva report" } },
+      { type: "image", src: "", caption: { fr: "Support Schneider Electric", en: "Schneider Electric material" } }
+    ]
+  }
+};
+
+const BRAND_ORDER = ["loreal", "optic2000", "pfizer", "unilever", "orange", "grandscomptes"];
+
+function getParam(name) {
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+function render() {
+  const key = getParam("marque") || getParam("brand") || "loreal";
+  const brand = BRANDS[key] || BRANDS.loreal;
+
+  document.getElementById("brand-eyebrow").innerHTML =
+    `<span class="fr">${brand.eyebrow.fr}</span><span class="en">${brand.eyebrow.en}</span>`;
+  document.getElementById("brand-title").innerHTML =
+    `<span class="fr">${brand.title.fr}</span><span class="en">${brand.title.en}</span>`;
+  document.getElementById("brand-desc").innerHTML =
+    `<span class="fr">${brand.desc.fr}</span><span class="en">${brand.desc.en}</span>`;
+
+  document.getElementById("brand-meta").innerHTML = brand.meta.map(m => `
+    <div><strong>${m.value.fr === m.value.en ? m.value.fr : `<span class="fr">${m.value.fr}</span><span class="en">${m.value.en}</span>`}</strong>
+    <span class="fr">${m.fr}</span><span class="en">${m.en}</span></div>
+  `).join("");
+
+  document.getElementById("gallery").innerHTML = brand.media.map(item => {
+    if (!item.src) {
+      return `<div class="gallery-item"><div class="placeholder">
+        <div class="plus">+</div>
+        <small><span class="fr">${item.caption.fr} — ajoute ton fichier dans BRANDS</span><span class="en">${item.caption.en} — add your file in BRANDS</span></small>
+      </div></div>`;
+    }
+    if (item.type === "video") {
+      return `<div class="gallery-item"><video src="${item.src}" controls></video></div>`;
+    }
+    return `<div class="gallery-item"><img src="${item.src}" alt="${item.caption.fr}"></div>`;
+  }).join("");
+
+  document.getElementById("brand-switch").innerHTML = BRAND_ORDER.map(k => {
+    const b = BRANDS[k];
+    const active = k === key ? "active" : "";
+    return `<a class="${active}" href="?marque=${k}">
+      <span class="fr">${b.title.fr}</span><span class="en">${b.title.en}</span>
+    </a>`;
+  }).join("");
+}
+
+render();
+
+const buttons = document.querySelectorAll('.lang-switch button');
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    document.body.classList.remove('lang-fr', 'lang-en');
+    document.body.classList.add('lang-' + lang);
+    document.documentElement.setAttribute('lang', lang);
+    buttons.forEach(b => b.classList.toggle('active', b === btn));
+  });
+});
+</script>
+
+</body>
+</html>

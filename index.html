@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thierry Caplat — Studio Manager / Traffic Studio Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-alt:#EEF3F3;
+    --ink:#33383D;
+    --ink-muted:#70767B;
+    --accent:#3A949E;
+    --accent-2:#256169;
+    --line: rgba(51,56,61,0.14);
+    --header-fade: rgba(255,255,255,0.92);
+  }
+  body.lang-en{
+    --bg:#1B2226;
+    --bg-alt:#222B30;
+    --ink:#F2F5F5;
+    --ink-muted:#9FB0B3;
+    --line: rgba(242,245,245,0.12);
+    --header-fade: rgba(27,34,38,0.92);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;transition:background-color .45s ease, color .45s ease, border-color .45s ease;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 32px;}
+
+  body.lang-fr .en{display:none;}
+  body.lang-en .fr{display:none;}
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    padding:22px 0;
+    background:linear-gradient(to bottom, var(--header-fade), transparent);
+  }
+  header .wrap{display:flex;justify-content:space-between;align-items:center;}
+  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--ink);}
+  .logo span{color:var(--accent);}
+  nav{display:flex;align-items:center;gap:40px;}
+  nav ul{display:flex;gap:36px;list-style:none;font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}
+  nav a{color:var(--ink-muted);transition:color .25s;position:relative;}
+  nav a:hover, nav a:focus-visible{color:var(--ink);}
+  nav a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--accent);transition:width .25s;}
+  nav a:hover::after{width:100%;}
+
+  .lang-switch{
+    font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.06em;
+    display:flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  }
+  .lang-switch button{
+    background:none;border:none;color:var(--ink-muted);padding:6px 14px;cursor:pointer;
+    font-family:inherit;font-size:inherit;letter-spacing:inherit;transition:color .2s, background .2s;
+  }
+  .lang-switch button.active{background:var(--accent);color:#FFFFFF;}
+
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    position:relative;
+    padding-top:100px;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(58,148,158,0.14), transparent 45%),
+      radial-gradient(circle at 10% 85%, rgba(37,97,105,0.10), transparent 40%);
+    pointer-events:none;
+  }
+  .groove{
+    position:absolute;right:-120px;top:50%;transform:translateY(-50%);
+    width:520px;height:520px;
+    pointer-events:none;opacity:0.35;
+    color:var(--ink);
+  }
+  .groove svg{width:100%;height:100%;animation:spin 40s linear infinite;}
+  .groove .accent-ring, .groove .accent-dot{color:var(--accent);}
+  @media (prefers-reduced-motion: reduce){ .groove svg{animation:none;} }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:22px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--accent);}
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(44px, 7.5vw, 96px);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    max-width:920px;
+    position:relative;z-index:1;
+  }
+  h1 em{font-style:italic;font-weight:400;color:var(--ink-muted);}
+  .hero p.lead{
+    max-width:540px;
+    margin-top:28px;
+    color:var(--ink-muted);
+    font-size:17px;
+    position:relative;z-index:1;
+  }
+  .hero-meta{
+    margin-top:64px;
+    display:flex;gap:56px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;color:var(--ink-muted);
+    position:relative;z-index:1;
+  }
+  .hero-meta strong{display:block;color:var(--ink);font-family:'Fraunces', serif;font-size:22px;font-weight:500;margin-bottom:4px;}
+
+  .section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--accent);
+    display:flex;align-items:baseline;gap:14px;
+    margin-bottom:48px;
+  }
+  .section-label .rule{flex:1;height:1px;background:var(--line);}
+
+  section{padding:120px 0;border-top:1px solid var(--line);}
+
+  .timeline{display:flex;flex-direction:column;}
+  .entry{
+    display:grid;grid-template-columns:110px 1fr;gap:32px;
+    padding:26px 0;border-bottom:1px solid var(--line);
+  }
+  .entry .code{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent);padding-top:4px;}
+  .entry .code .years{display:block;color:var(--ink-muted);margin-top:4px;}
+  .entry h3{font-family:'Fraunces', serif;font-weight:500;font-size:22px;margin-bottom:4px;}
+  .entry .place{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;}
+  .entry p{color:var(--ink-muted);font-size:15px;max-width:640px;}
+  .entry .case-link{
+    display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+    font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent);
+  }
+  .entry .case-link:hover{color:var(--ink);}
+
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:start;}
+  .about-grid p{color:var(--ink-muted);font-size:17px;margin-bottom:20px;max-width:520px;}
+  .about-grid p strong{color:var(--ink);font-weight:500;}
+  .skills-block{margin-bottom:36px;}
+  .skills-block h4{font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:16px;}
+  .skills{list-style:none;display:flex;flex-wrap:wrap;gap:10px;}
+  .skills li{
+    font-family:'IBM Plex Mono', monospace;font-size:12px;
+    border:1px solid var(--line);border-radius:16px;padding:7px 14px;color:var(--ink-muted);
+  }
+
+  .contact-inner{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:40px;}
+  .contact h2{
+    font-family:'Fraunces', serif;font-weight:500;
+    font-size:clamp(34px, 4.6vw, 54px);
+    max-width:620px;
+  }
+  .contact-links{display:flex;flex-direction:column;gap:14px;font-family:'IBM Plex Mono', monospace;font-size:14px;}
+  .contact-links a{color:var(--ink-muted);transition:color .25s;}
+  .contact-links a:hover{color:var(--accent);}
+
+  footer{
+    padding:32px 0;
+    font-family:'IBM Plex Mono', monospace;font-size:11px;color:var(--ink-muted);
+    display:flex;justify-content:space-between;
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:760px){
+    nav ul{display:none;}
+    .groove{display:none;}
+    .entry{grid-template-columns:1fr;gap:6px;}
+    .about-grid{grid-template-columns:1fr;gap:48px;}
+    .hero-meta{gap:32px;}
+    section{padding:80px 0;}
+  }
+</style>
+</head>
+<body class="lang-fr">
+
+<header>
+  <div class="wrap">
+    <div class="logo">THIERRY<span>·</span>CAPLAT</div>
+    <nav>
+      <ul>
+        <li><a href="#parcours"><span class="fr">Parcours</span><span class="en">Career</span></a></li>
+        <li><a href="projet.html"><span class="fr">Projets</span><span class="en">Projects</span></a></li>
+        <li><a href="#competences"><span class="fr">Compétences</span><span class="en">Skills</span></a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="lang-switch" role="group" aria-label="Langue / Language">
+        <button type="button" class="active" data-lang="fr">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="groove" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="98" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.5"/>
+      <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.45"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
+      <circle cx="100" cy="100" r="56" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.35"/>
+      <circle cx="100" cy="100" r="42" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.3"/>
+      <circle class="accent-ring" cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+      <circle class="accent-dot" cx="100" cy="100" r="6" fill="currentColor"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="fr">Studio Manager &amp; Direction artistique</span>
+      <span class="en">Studio Manager &amp; Art Direction</span>
+    </div>
+    <h1>
+      <span class="fr">Faire dialoguer<br><em>création</em><br>et production.</span>
+      <span class="en">Bridging<br><em>creativity</em><br>and production.</span>
+    </h1>
+    <p class="lead">
+      <span class="fr">Traffic &amp; Studio Manager certifié UX/UI, basé à Nice. J'encadre des équipes de designers, je fluidifie les workflows agiles et je garantis la cohérence visuelle de projets menés pour L'Oréal, Optic 2000, Pfizer ou Orange.</span>
+      <span class="en">UX/UI-certified Traffic &amp; Studio Manager, based in Nice, France. I lead design teams, streamline agile workflows and safeguard visual consistency on projects for L'Oréal, Optic 2000, Pfizer and Orange.</span>
+    </p>
+    <div class="hero-meta">
+      <div><strong>98%</strong><span class="fr">satisfaction client</span><span class="en">client satisfaction</span></div>
+      <div><strong>1000+</strong><span class="fr">projets par an</span><span class="en">projects a year</span></div>
+      <div><strong>30+</strong><span class="fr">designers encadrés</span><span class="en">designers led</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap">
+    <div class="section-label"><span class="fr">Parcours professionnel</span><span class="en">Professional experience</span><div class="rule"></div></div>
+
+    <div class="timeline">
+
+      <div class="entry">
+        <div class="code">01<span class="years">2024—<span class="fr">présent</span><span class="en">present</span></span></div>
+        <div>
+          <h3>Senior Studio Manager</h3>
+          <div class="place">SGXgraphics — Paris</div>
+          <p><span class="fr">À la tête d'un studio packaging de 5 designers seniors pour les comptes L'Oréal (La Roche-Posay, Vichy) : plus de 1 000 projets par an et 98 % de satisfaction client.</span>
+          <span class="en">Heading a 5-person packaging studio for L'Oréal accounts (La Roche-Posay, Vichy): over 1,000 projects a year with a 98% client satisfaction score.</span></p>
+          <a class="case-link" href="projet.html?marque=loreal"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code">02<span class="years">2016—2024</span></div>
+        <div>
+          <h3>Traffic Studio Manager</h3>
+          <div class="place">Audioptic Trade Services — Clamart</div>
+          <p><span class="fr">Pilotage de la production graphique pour Optic 2000, Lissac, Gadol et Audio 2000 : encadrement de 4 designers, plus de 1 000 projets annuels, identité visuelle et campagnes intégrées.</span>
+          <span class="en">Drove graphic production for Optic 2000, Lissac, Gadol and Audio 2000: managed a team of 4 designers, over 1,000 projects a year, brand identity and integrated campaigns.</span></p>
+          <a class="case-link" href="projet.html?marque=optic2000"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code">03<span class="years">2016</span></div>
+        <div>
+          <h3>Studio Coordinator</h3>
+          <div class="place">Purple Agency — Paris</div>
+          <p><span class="fr">Direction d'une équipe de 5 designers sur des projets pharmaceutiques clés (MSD, Pfizer).</span>
+          <span class="en">Led a team of 5 designers on key pharmaceutical accounts (MSD, Pfizer).</span></p>
+          <a class="case-link" href="projet.html?marque=pfizer"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code">04<span class="years">2012—2016</span></div>
+        <div>
+          <h3>Digital Production Manager</h3>
+          <div class="place">CIPE — Port Louis</div>
+          <p><span class="fr">Stratégie de publication en ligne (35 000 publications, 2 millions de pages indexées) et encadrement d'une équipe de 10 designers.</span>
+          <span class="en">Online publishing strategy (35,000 publications, 2 million indexed pages) leading a team of 10 designers.</span></p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code">05<span class="years">2011—2012</span></div>
+        <div>
+          <h3>Studio Manager</h3>
+          <div class="place">Malakoff Médéric — Paris</div>
+          <p><span class="fr">Encadrement d'une équipe créative de 7 designers : design visuel, PLV, signalétique et identité digitale.</span>
+          <span class="en">Led a creative team of 7 designers across visual design, POS displays, signage and digital identity.</span></p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code">06<span class="years">2011</span></div>
+        <div>
+          <h3>Art Production Specialist</h3>
+          <div class="place">Unilever Europe — Leatherhead (UK)</div>
+          <p><span class="fr">Chef de projet packaging pour Omo &amp; Surf, à la croisée des enjeux créatifs et techniques.</span>
+          <span class="en">Packaging project manager for Omo &amp; Surf, balancing creative and technical requirements.</span></p>
+          <a class="case-link" href="projet.html?marque=unilever"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code">07<span class="years">2009—2011</span></div>
+        <div>
+          <h3><span class="fr">Directeur artistique freelance</span><span class="en">Freelance Art Director</span></h3>
+          <div class="place">Creative Works — Epsom (UK)</div>
+          <p><span class="fr">Conception de supports de communication print multilingues pour Alstom, Areva, Schneider Electric et Kimberly-Clark.</span>
+          <span class="en">Designed multilingual print communication materials for Alstom, Areva, Schneider Electric and Kimberly-Clark.</span></p>
+          <a class="case-link" href="projet.html?marque=grandscomptes"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code">08<span class="years">2008—2009</span></div>
+        <div>
+          <h3><span class="fr">Directeur artistique</span><span class="en">Art Director</span></h3>
+          <div class="place">John Brown Media — Londres (UK)</div>
+          <p><span class="fr">Conception du magalogue Orange, à la croisée de la marque et de ses utilisateurs.</span>
+          <span class="en">Designed the Orange magalogue, connecting the brand with its users.</span></p>
+          <a class="case-link" href="projet.html?marque=orange"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code">09<span class="years">2000—2008</span></div>
+        <div>
+          <h3><span class="fr">Studio Manager magazine</span><span class="en">Magazine Studio Manager</span></h3>
+          <div class="place">CIPL — Luxembourg</div>
+          <p><span class="fr">Supervision du studio graphique du principal mensuel du marché de la presse informatique.</span>
+          <span class="en">Supervised the graphic studio for the leading monthly title in the computer purchasing press market.</span></p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code">10<span class="years">1994—2000</span></div>
+        <div>
+          <h3>Studio Manager</h3>
+          <div class="place">Pressimage — Montreuil</div>
+          <p><span class="fr">Encadrement d'équipes créatives pour des magazines de jeux vidéo et multimédia, amélioration des techniques éditoriales.</span>
+          <span class="en">Led creative teams for gaming and multimedia magazine titles, improving editorial techniques.</span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <div class="section-label"><span class="fr">À propos &amp; compétences</span><span class="en">About &amp; skills</span><div class="rule"></div></div>
+    <div class="about-grid">
+      <div>
+        <p>
+          <span class="fr"><strong>Thierry Caplat</strong>, Traffic &amp; Studio Manager certifié UX/UI (Pyramyd, 2024), fort de 15 ans à la tête de studios graphiques pour des marques telles que L'Oréal, Orange, Pfizer et Unilever. Formé en communication et publicité (BTS, CFPJ Paris, LPEP Vincennes), je m'appuie sur cette double culture créative et opérationnelle pour orchestrer des projets exigeants, dans le respect des délais et de l'identité visuelle des marques.</span>
+          <span class="en"><strong>Thierry Caplat</strong>, UX/UI-certified Traffic &amp; Studio Manager (Pyramyd, 2024), with 15 years leading graphic studios for brands including L'Oréal, Orange, Pfizer and Unilever. Trained in communication and advertising (BTS, CFPJ Paris, LPEP Vincennes), I bring together creative and operational thinking to run demanding projects on time, without compromising brand identity.</span>
+        </p>
+        <p>
+          <span class="fr">En dehors du studio, je restaure de vieilles voitures et motos, je collectionne vinyles, cassettes et objets design du siècle dernier. Cette passion pour redonner vie à des objets anciens nourrit directement ma façon de travailler : chaque projet est une rencontre entre nostalgie et innovation.</span>
+          <span class="en">Outside the studio, I restore vintage cars and motorcycles, and collect vinyl records, cassettes and century-old design objects. This passion for bringing old objects back to life feeds directly into how I work: every project is a fusion of nostalgia and innovation.</span>
+        </p>
+      </div>
+      <div>
+        <div class="skills-block">
+          <h4><span class="fr">Compétences clés</span><span class="en">Core skills</span></h4>
+          <ul class="skills">
+            <li><span class="fr">Planning / Traffic / Production</span><span class="en">Planning / Traffic / Production</span></li>
+            <li><span class="fr">Design graphique</span><span class="en">Graphic design</span></li>
+            <li>Adobe Creative Suite</li>
+            <li>Adobe Acrobat Pro</li>
+            <li>Figma</li>
+            <li>Office 365</li>
+            <li><span class="fr">IA générative</span><span class="en">Generative AI</span></li>
+          </ul>
+        </div>
+        <div class="skills-block">
+          <h4><span class="fr">Savoir-être</span><span class="en">Soft skills</span></h4>
+          <ul class="skills">
+            <li><span class="fr">Créativité</span><span class="en">Creativity</span></li>
+            <li><span class="fr">Écoute active</span><span class="en">Active listening</span></li>
+            <li>Leadership</li>
+            <li><span class="fr">Réactivité</span><span class="en">Responsiveness</span></li>
+            <li><span class="fr">Orientation résultats</span><span class="en">Goal orientation</span></li>
+            <li><span class="fr">Sens du service client</span><span class="en">Customer service</span></li>
+            <li><span class="fr">Curiosité</span><span class="en">Curiosity</span></li>
+            <li><span class="fr">Esprit d'équipe</span><span class="en">Teamwork</span></li>
+            <li><span class="fr">Autonomie</span><span class="en">Autonomy</span></li>
+          </ul>
+        </div>
+        <div class="skills-block">
+          <h4><span class="fr">Langues</span><span class="en">Languages</span></h4>
+          <ul class="skills">
+            <li><span class="fr">Français — natif</span><span class="en">French — native</span></li>
+            <li><span class="fr">Anglais — courant</span><span class="en">English — fluent</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact">
+    <div class="contact-inner">
+      <h2>
+        <span class="fr">Un projet à orchestrer ?<br>Parlons-en.</span>
+        <span class="en">A project to run?<br>Let's talk.</span>
+      </h2>
+      <div class="contact-links">
+        <a href="mailto:tdpcaplat@gmail.com">tdpcaplat@gmail.com</a>
+        <a href="tel:+33610076383">+33 (0)6 10 07 63 83</a>
+        <a href="https://www.linkedin.com/in/thierry-caplat191a3819" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.thierrycaplat.com" target="_blank" rel="noopener">thierrycaplat.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:center;width:100%;">
+    <span>© 2026 Thierry Caplat</span>
+  </div>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.lang-switch button');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      document.body.classList.remove('lang-fr', 'lang-en');
+      document.body.classList.add('lang-' + lang);
+      document.documentElement.setAttribute('lang', lang);
+      buttons.forEach(b => b.classList.toggle('active', b === btn));
+    });
+  });
+</script>
+
+</body>
+</html>
