@@ -88,15 +88,16 @@
     pointer-events:none;
   }
   .groove{
-    position:absolute;right:-120px;top:50%;transform:translateY(-50%);
+    position:fixed;right:-120px;top:12%;
     width:520px;height:520px;
-    pointer-events:none;opacity:0.7;
+    pointer-events:none;opacity:0.35;
     color:var(--ink);
+    z-index:-1;
+    transition:top .05s linear;
   }
-  .groove svg{width:100%;height:100%;animation:spin 40s linear infinite;}
-  .groove .accent-ring, .groove .accent-dot{color:var(--accent);}
-  @media (prefers-reduced-motion: reduce){ .groove svg{animation:none;} }
-  @keyframes spin{to{transform:rotate(360deg);}}
+  .groove svg{width:100%;height:100%;}
+  .groove .ring{transition:color .35s ease;}
+  .groove .accent-dot{color:var(--accent);}
 
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
@@ -127,10 +128,10 @@
     margin-top:64px;
     display:flex;gap:56px;flex-wrap:wrap;
     font-family:'IBM Plex Mono', monospace;
-    font-size:12px;color:var(--ink-muted);
+    font-size:12px;color:var(--ink);
     position:relative;z-index:1;
   }
-  .hero-meta strong{display:block;color:var(--ink);font-family:'Fraunces', serif;font-size:22px;font-weight:500;margin-bottom:4px;}
+  .hero-meta strong{display:block;color:var(--accent);font-family:'Fraunces', serif;font-size:22px;font-weight:500;margin-bottom:4px;}
 
   .section-label{
     font-family:'IBM Plex Mono', monospace;
@@ -152,7 +153,9 @@
   .entry .code .years{display:block;color:var(--ink);margin-top:4px;}
   .entry h3{font-family:'Fraunces', serif;font-weight:500;font-size:22px;margin-bottom:4px;color:var(--accent);}
   .entry .place{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;}
+  .entry .place .city{color:var(--ink);}
   .entry p{color:var(--ink-muted);font-size:15px;max-width:640px;}
+  .entry p .brand{color:var(--accent);font-weight:500;}
   .entry .case-link{
     display:inline-flex;align-items:center;gap:6px;margin-top:14px;
     font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink);
@@ -222,12 +225,12 @@
 <section class="hero">
   <div class="groove" aria-hidden="true">
     <svg viewBox="0 0 200 200">
-      <circle cx="100" cy="100" r="98" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
-      <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
-      <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.5"/>
-      <circle cx="100" cy="100" r="56" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.45"/>
-      <circle cx="100" cy="100" r="42" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.4"/>
-      <circle class="accent-ring" cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="2" opacity="0.8"/>
+      <circle class="ring" data-ring="5" cx="100" cy="100" r="98" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+      <circle class="ring" data-ring="4" cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+      <circle class="ring" data-ring="3" cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+      <circle class="ring" data-ring="2" cx="100" cy="100" r="56" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+      <circle class="ring" data-ring="1" cx="100" cy="100" r="42" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+      <circle class="ring" data-ring="0" cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="2" opacity="0.8"/>
       <circle class="accent-dot" cx="100" cy="100" r="7" fill="currentColor"/>
     </svg>
   </div>
@@ -262,9 +265,9 @@
         <div class="code"><span class="years">2024—<span class="fr">présent</span><span class="en">present</span></span></div>
         <div>
           <h3>Senior Studio Manager</h3>
-          <div class="place">SGXgraphics — Paris</div>
-          <p><span class="fr">À la tête d'un studio packaging de 5 designers seniors pour les comptes L'Oréal (La Roche-Posay, Vichy) : plus de 1 000 projets par an et 98 % de satisfaction client.</span>
-          <span class="en">Heading a 5-person packaging studio for L'Oréal accounts (La Roche-Posay, Vichy): over 1,000 projects a year with a 98% client satisfaction score.</span></p>
+          <div class="place">SGXgraphics <span class="city">— Paris</span></div>
+          <p><span class="fr">À la tête d'un studio packaging de 5 designers seniors pour les comptes <span class="brand">L'Oréal</span> (<span class="brand">La Roche-Posay</span>, <span class="brand">Vichy</span>) : plus de 1 000 projets par an et 98 % de satisfaction client.</span>
+          <span class="en">Heading a 5-person packaging studio for <span class="brand">L'Oréal</span> accounts (<span class="brand">La Roche-Posay</span>, <span class="brand">Vichy</span>): over 1,000 projects a year with a 98% client satisfaction score.</span></p>
           <a class="case-link" href="projet.html?marque=loreal"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
@@ -273,9 +276,9 @@
         <div class="code"><span class="years">2016—2024</span></div>
         <div>
           <h3>Traffic Studio Manager</h3>
-          <div class="place">Audioptic Trade Services — Clamart</div>
-          <p><span class="fr">Pilotage de la production graphique pour Optic 2000, Lissac, Gadol et Audio 2000 : encadrement de 4 designers, plus de 1 000 projets annuels, identité visuelle et campagnes intégrées.</span>
-          <span class="en">Drove graphic production for Optic 2000, Lissac, Gadol and Audio 2000: managed a team of 4 designers, over 1,000 projects a year, brand identity and integrated campaigns.</span></p>
+          <div class="place">Audioptic Trade Services <span class="city">— Clamart</span></div>
+          <p><span class="fr">Pilotage de la production graphique pour <span class="brand">Optic 2000</span>, <span class="brand">Lissac</span>, <span class="brand">Gadol</span> et <span class="brand">Audio 2000</span> : encadrement de 4 designers, plus de 1 000 projets annuels, identité visuelle et campagnes intégrées.</span>
+          <span class="en">Drove graphic production for <span class="brand">Optic 2000</span>, <span class="brand">Lissac</span>, <span class="brand">Gadol</span> and <span class="brand">Audio 2000</span>: managed a team of 4 designers, over 1,000 projects a year, brand identity and integrated campaigns.</span></p>
           <a class="case-link" href="projet.html?marque=optic2000"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
@@ -284,9 +287,9 @@
         <div class="code"><span class="years">2016</span></div>
         <div>
           <h3>Studio Coordinator</h3>
-          <div class="place">Purple Agency — Paris</div>
-          <p><span class="fr">Direction d'une équipe de 5 designers sur des projets pharmaceutiques clés (MSD, Pfizer).</span>
-          <span class="en">Led a team of 5 designers on key pharmaceutical accounts (MSD, Pfizer).</span></p>
+          <div class="place">Purple Agency <span class="city">— Paris</span></div>
+          <p><span class="fr">Direction d'une équipe de 5 designers sur des projets pharmaceutiques clés (<span class="brand">MSD</span>, <span class="brand">Pfizer</span>).</span>
+          <span class="en">Led a team of 5 designers on key pharmaceutical accounts (<span class="brand">MSD</span>, <span class="brand">Pfizer</span>).</span></p>
           <a class="case-link" href="projet.html?marque=pfizer"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
@@ -295,7 +298,7 @@
         <div class="code"><span class="years">2012—2016</span></div>
         <div>
           <h3>Digital Production Manager</h3>
-          <div class="place">CIPE — Port Louis</div>
+          <div class="place">CIPE <span class="city">— Port Louis</span></div>
           <p><span class="fr">Stratégie de publication en ligne (35 000 publications, 2 millions de pages indexées) et encadrement d'une équipe de 10 designers.</span>
           <span class="en">Online publishing strategy (35,000 publications, 2 million indexed pages) leading a team of 10 designers.</span></p>
         </div>
@@ -305,7 +308,7 @@
         <div class="code"><span class="years">2011—2012</span></div>
         <div>
           <h3>Studio Manager</h3>
-          <div class="place">Malakoff Médéric — Paris</div>
+          <div class="place">Malakoff Médéric <span class="city">— Paris</span></div>
           <p><span class="fr">Encadrement d'une équipe créative de 7 designers : design visuel, PLV, signalétique et identité digitale.</span>
           <span class="en">Led a creative team of 7 designers across visual design, POS displays, signage and digital identity.</span></p>
         </div>
@@ -315,9 +318,9 @@
         <div class="code"><span class="years">2011</span></div>
         <div>
           <h3>Art Production Specialist</h3>
-          <div class="place">Unilever Europe — Leatherhead (UK)</div>
-          <p><span class="fr">Chef de projet packaging pour Omo &amp; Surf, à la croisée des enjeux créatifs et techniques.</span>
-          <span class="en">Packaging project manager for Omo &amp; Surf, balancing creative and technical requirements.</span></p>
+          <div class="place">Unilever Europe <span class="city">— Leatherhead (UK)</span></div>
+          <p><span class="fr">Chef de projet packaging pour <span class="brand">Omo</span> &amp; <span class="brand">Surf</span>, à la croisée des enjeux créatifs et techniques.</span>
+          <span class="en">Packaging project manager for <span class="brand">Omo</span> &amp; <span class="brand">Surf</span>, balancing creative and technical requirements.</span></p>
           <a class="case-link" href="projet.html?marque=unilever"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
@@ -326,9 +329,9 @@
         <div class="code"><span class="years">2009—2011</span></div>
         <div>
           <h3><span class="fr">Directeur artistique freelance</span><span class="en">Freelance Art Director</span></h3>
-          <div class="place">Creative Works — Epsom (UK)</div>
-          <p><span class="fr">Conception de supports de communication print multilingues pour Alstom, Areva, Schneider Electric et Kimberly-Clark.</span>
-          <span class="en">Designed multilingual print communication materials for Alstom, Areva, Schneider Electric and Kimberly-Clark.</span></p>
+          <div class="place">Creative Works <span class="city">— Epsom (UK)</span></div>
+          <p><span class="fr">Conception de supports de communication print multilingues pour <span class="brand">Alstom</span>, <span class="brand">Areva</span>, <span class="brand">Schneider Electric</span> et <span class="brand">Kimberly-Clark</span>.</span>
+          <span class="en">Designed multilingual print communication materials for <span class="brand">Alstom</span>, <span class="brand">Areva</span>, <span class="brand">Schneider Electric</span> and <span class="brand">Kimberly-Clark</span>.</span></p>
           <a class="case-link" href="projet.html?marque=grandscomptes"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
@@ -337,9 +340,9 @@
         <div class="code"><span class="years">2008—2009</span></div>
         <div>
           <h3><span class="fr">Directeur artistique</span><span class="en">Art Director</span></h3>
-          <div class="place">John Brown Media — Londres (UK)</div>
-          <p><span class="fr">Conception du magalogue Orange, à la croisée de la marque et de ses utilisateurs.</span>
-          <span class="en">Designed the Orange magalogue, connecting the brand with its users.</span></p>
+          <div class="place">John Brown Media <span class="city">— Londres (UK)</span></div>
+          <p><span class="fr">Conception du magalogue <span class="brand">Orange</span>, à la croisée de la marque et de ses utilisateurs.</span>
+          <span class="en">Designed the <span class="brand">Orange</span> magalogue, connecting the brand with its users.</span></p>
           <a class="case-link" href="projet.html?marque=orange"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
@@ -348,7 +351,7 @@
         <div class="code"><span class="years">2000—2008</span></div>
         <div>
           <h3><span class="fr">Studio Manager magazine</span><span class="en">Magazine Studio Manager</span></h3>
-          <div class="place">CIPL — Luxembourg</div>
+          <div class="place">CIPL <span class="city">— Luxembourg</span></div>
           <p><span class="fr">Supervision du studio graphique du principal mensuel du marché de la presse informatique.</span>
           <span class="en">Supervised the graphic studio for the leading monthly title in the computer purchasing press market.</span></p>
         </div>
@@ -358,7 +361,7 @@
         <div class="code"><span class="years">1994—2000</span></div>
         <div>
           <h3>Studio Manager</h3>
-          <div class="place">Pressimage — Montreuil</div>
+          <div class="place">Pressimage <span class="city">— Montreuil</span></div>
           <p><span class="fr">Encadrement d'équipes créatives pour des magazines de jeux vidéo et multimédia, amélioration des techniques éditoriales.</span>
           <span class="en">Led creative teams for gaming and multimedia magazine titles, improving editorial techniques.</span></p>
         </div>
@@ -445,14 +448,71 @@
 </footer>
 
 <script>
+  const groove = document.querySelector('.groove');
+  const rings = document.querySelectorAll('.groove .ring');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (groove && rings.length && !prefersReducedMotion) {
+    let ticking = false;
+    const updateOnScroll = () => {
+      const y = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? Math.min(Math.max(y / maxScroll, 0), 1) : 0;
+
+      // Le vinyle voyage du haut vers le bas de la page au fil du scroll
+      const topPercent = 10 + progress * 75; // de 10% à 85% de la hauteur d'écran
+      groove.style.top = `${topPercent}%`;
+
+      // L'orange se déplace de l'anneau le plus petit (0) au plus grand (5)
+      const activeRing = Math.round(progress * (rings.length - 1));
+      rings.forEach(ring => {
+        const isActive = Number(ring.dataset.ring) === activeRing;
+        ring.style.color = isActive ? 'var(--accent)' : 'var(--ink)';
+      });
+
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateOnScroll);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateOnScroll();
+  }
+
+  function getParam(name) {
+    return new URLSearchParams(window.location.search).get(name);
+  }
+
+  function syncOutboundLinks(lang) {
+    document.querySelectorAll('a[href^="projet.html"]').forEach(a => {
+      const url = new URL(a.getAttribute('href'), window.location.href);
+      url.searchParams.set('lang', lang);
+      a.setAttribute('href', url.pathname.split('/').pop() + url.search);
+    });
+  }
+
+  const initialLang = getParam('lang') === 'en' ? 'en' : 'fr';
+  document.body.classList.remove('lang-fr', 'lang-en');
+  document.body.classList.add('lang-' + initialLang);
+  document.documentElement.setAttribute('lang', initialLang);
+  syncOutboundLinks(initialLang);
+
   const buttons = document.querySelectorAll('.lang-switch button');
   buttons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === initialLang);
     btn.addEventListener('click', () => {
       const lang = btn.dataset.lang;
       document.body.classList.remove('lang-fr', 'lang-en');
       document.body.classList.add('lang-' + lang);
       document.documentElement.setAttribute('lang', lang);
       buttons.forEach(b => b.classList.toggle('active', b === btn));
+      syncOutboundLinks(lang);
+
+      const url = new URL(window.location);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', url);
     });
   });
 </script>
