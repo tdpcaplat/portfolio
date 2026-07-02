@@ -38,6 +38,18 @@
   body.lang-fr .en{display:none;}
   body.lang-en .fr{display:none;}
 
+  .groove{
+    position:fixed;right:-120px;top:12%;
+    width:520px;height:520px;
+    pointer-events:none;opacity:0.35;
+    color:var(--ink);
+    z-index:-1;
+    transition:top .05s linear;
+  }
+  .groove svg{width:100%;height:100%;}
+  .groove .ring{transition:color .35s ease;}
+  .groove .accent-dot{color:var(--accent);}
+
   header{padding:26px 0;border-bottom:1px solid var(--line);}
   header .wrap{display:flex;justify-content:space-between;align-items:center;}
   .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent);}
@@ -64,9 +76,9 @@
   h1{font-family:'Fraunces', serif;font-weight:500;font-size:clamp(38px, 6vw, 72px);line-height:1.05;max-width:820px;color:var(--accent);}
   .brand-meta{
     display:flex;gap:48px;flex-wrap:wrap;margin-top:36px;
-    font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-muted);
+    font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink);
   }
-  .brand-meta strong{display:block;color:var(--ink);font-size:14px;margin-bottom:4px;font-family:'Work Sans',sans-serif;font-weight:500;}
+  .brand-meta strong{display:block;color:var(--accent);font-size:14px;margin-bottom:4px;font-family:'Work Sans',sans-serif;font-weight:500;}
   .brand-desc{max-width:640px;margin-top:28px;color:var(--ink-muted);font-size:17px;}
 
   section{padding:80px 0;}
@@ -104,6 +116,7 @@
   @media (max-width:760px){
     .gallery{grid-template-columns:1fr 1fr;}
     .header-inner{gap:16px;}
+    .groove{display:none;}
   }
   @media (max-width:520px){
     .gallery{grid-template-columns:1fr;}
@@ -111,6 +124,18 @@
 </style>
 </head>
 <body class="lang-fr">
+
+<div class="groove" aria-hidden="true">
+  <svg viewBox="0 0 200 200">
+    <circle class="ring" data-ring="5" cx="100" cy="100" r="98" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+    <circle class="ring" data-ring="4" cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+    <circle class="ring" data-ring="3" cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+    <circle class="ring" data-ring="2" cx="100" cy="100" r="56" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+    <circle class="ring" data-ring="1" cx="100" cy="100" r="42" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/>
+    <circle class="ring" data-ring="0" cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="2" opacity="0.8"/>
+    <circle class="accent-dot" cx="100" cy="100" r="7" fill="currentColor"/>
+  </svg>
+</div>
 
 <header>
   <div class="wrap">
@@ -151,6 +176,39 @@
 </footer>
 
 <script>
+(function(){
+  const groove = document.querySelector('.groove');
+  const rings = document.querySelectorAll('.groove .ring');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (groove && rings.length && !prefersReducedMotion) {
+    let ticking = false;
+    const updateOnScroll = () => {
+      const y = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? Math.min(Math.max(y / maxScroll, 0), 1) : 0;
+
+      const topPercent = 10 + progress * 75;
+      groove.style.top = `${topPercent}%`;
+
+      const activeRing = Math.round(progress * (rings.length - 1));
+      rings.forEach(ring => {
+        const isActive = Number(ring.dataset.ring) === activeRing;
+        ring.style.color = isActive ? 'var(--accent)' : 'var(--ink)';
+      });
+
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateOnScroll);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateOnScroll();
+  }
+})();
+
 /* ============================================================
    POUR AJOUTER TES PROPRES IMAGES / VIDEOS :
    1. Copie tes fichiers (photos, vidéos) dans un dossier "medias/"
@@ -279,9 +337,14 @@ function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
 
+function currentLang() {
+  return document.body.classList.contains('lang-en') ? 'en' : 'fr';
+}
+
 function render() {
   const key = getParam("marque") || getParam("brand") || "loreal";
   const brand = BRANDS[key] || BRANDS.loreal;
+  const lang = currentLang();
 
   document.getElementById("brand-eyebrow").innerHTML =
     `<span class="fr">${brand.eyebrow.fr}</span><span class="en">${brand.eyebrow.en}</span>`;
@@ -311,22 +374,38 @@ function render() {
   document.getElementById("brand-switch").innerHTML = BRAND_ORDER.map(k => {
     const b = BRANDS[k];
     const active = k === key ? "active" : "";
-    return `<a class="${active}" href="?marque=${k}">
+    return `<a class="${active}" href="?marque=${k}&lang=${lang}">
       <span class="fr">${b.title.fr}</span><span class="en">${b.title.en}</span>
     </a>`;
   }).join("");
+
+  const backLink = document.querySelector('.back');
+  if (backLink) backLink.setAttribute('href', `index.html?lang=${lang}`);
 }
+
+// Applique la langue présente dans l'URL (sinon FR par défaut) avant le premier rendu
+const initialLang = getParam("lang") === "en" ? "en" : "fr";
+document.body.classList.remove('lang-fr', 'lang-en');
+document.body.classList.add('lang-' + initialLang);
+document.documentElement.setAttribute('lang', initialLang);
 
 render();
 
 const buttons = document.querySelectorAll('.lang-switch button');
 buttons.forEach(btn => {
+  btn.classList.toggle('active', btn.dataset.lang === initialLang);
   btn.addEventListener('click', () => {
     const lang = btn.dataset.lang;
     document.body.classList.remove('lang-fr', 'lang-en');
     document.body.classList.add('lang-' + lang);
     document.documentElement.setAttribute('lang', lang);
     buttons.forEach(b => b.classList.toggle('active', b === btn));
+
+    const url = new URL(window.location);
+    url.searchParams.set('lang', lang);
+    window.history.replaceState({}, '', url);
+
+    render();
   });
 });
 </script>
