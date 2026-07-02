@@ -15,21 +15,21 @@
   :root{
     --bg:#0424E3;
     --bg-alt:#031C9E;
-    --ink:#FF5F10;
-    --ink-muted:#FF9C66;
+    --ink:#FFFFFF;
+    --ink-muted: rgba(255,255,255,0.68);
     --accent:#FF5F10;
     --accent-2:#FF8A47;
-    --line: rgba(255,95,16,0.35);
+    --line: rgba(255,95,16,0.45);
     --header-fade: rgba(4,36,227,0.92);
   }
   body.lang-en{
     --bg:#FF5F10;
     --bg-alt:#E0500A;
-    --ink:#0424E3;
-    --ink-muted:#3247FF;
+    --ink:#FFFFFF;
+    --ink-muted: rgba(255,255,255,0.68);
     --accent:#0424E3;
     --accent-2:#4C5FFF;
-    --line: rgba(4,36,227,0.35);
+    --line: rgba(4,36,227,0.45);
     --header-fade: rgba(255,95,16,0.92);
   }
   *{margin:0;padding:0;box-sizing:border-box;transition:background-color .45s ease, color .45s ease, border-color .45s ease;}
@@ -54,8 +54,8 @@
     background:linear-gradient(to bottom, var(--header-fade), transparent);
   }
   header .wrap{display:flex;justify-content:space-between;align-items:center;}
-  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--ink);}
-  .logo span{color:var(--accent);}
+  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent);}
+  .logo span{color:var(--ink);}
   nav{display:flex;align-items:center;gap:40px;}
   nav ul{display:flex;gap:36px;list-style:none;font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}
   nav a{color:var(--ink-muted);transition:color .25s;position:relative;}
@@ -90,7 +90,7 @@
   .groove{
     position:absolute;right:-120px;top:50%;transform:translateY(-50%);
     width:520px;height:520px;
-    pointer-events:none;opacity:0.35;
+    pointer-events:none;opacity:0.7;
     color:var(--ink);
   }
   .groove svg{width:100%;height:100%;animation:spin 40s linear infinite;}
@@ -101,7 +101,7 @@
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
     font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
-    color:var(--accent);margin-bottom:22px;
+    color:var(--ink);margin-bottom:22px;
     display:flex;align-items:center;gap:10px;
   }
   .eyebrow::before{content:'';width:26px;height:1px;background:var(--accent);}
@@ -113,8 +113,9 @@
     letter-spacing:-0.01em;
     max-width:920px;
     position:relative;z-index:1;
+    color:var(--accent);
   }
-  h1 em{font-style:italic;font-weight:400;color:var(--ink-muted);}
+  h1 em{font-style:italic;font-weight:400;color:var(--ink);}
   .hero p.lead{
     max-width:540px;
     margin-top:28px;
@@ -134,7 +135,7 @@
   .section-label{
     font-family:'IBM Plex Mono', monospace;
     font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
-    color:var(--accent);
+    color:var(--ink);
     display:flex;align-items:baseline;gap:14px;
     margin-bottom:48px;
   }
@@ -147,22 +148,23 @@
     display:grid;grid-template-columns:110px 1fr;gap:32px;
     padding:26px 0;border-bottom:1px solid var(--line);
   }
-  .entry .code{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent);padding-top:4px;}
-  .entry .code .years{display:block;color:var(--ink-muted);margin-top:4px;}
-  .entry h3{font-family:'Fraunces', serif;font-weight:500;font-size:22px;margin-bottom:4px;}
-  .entry .place{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;}
+  .entry .code{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink);padding-top:4px;}
+  .entry .code .years{display:block;color:var(--ink);margin-top:4px;}
+  .entry h3{font-family:'Fraunces', serif;font-weight:500;font-size:22px;margin-bottom:4px;color:var(--accent);}
+  .entry .place{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;}
   .entry p{color:var(--ink-muted);font-size:15px;max-width:640px;}
   .entry .case-link{
     display:inline-flex;align-items:center;gap:6px;margin-top:14px;
-    font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent);
+    font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink);
+    text-decoration:underline;text-underline-offset:3px;
   }
-  .entry .case-link:hover{color:var(--ink);}
+  .entry .case-link:hover{color:var(--accent);}
 
   .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:start;}
   .about-grid p{color:var(--ink-muted);font-size:17px;margin-bottom:20px;max-width:520px;}
   .about-grid p strong{color:var(--ink);font-weight:500;}
   .skills-block{margin-bottom:36px;}
-  .skills-block h4{font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:16px;}
+  .skills-block h4{font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink);margin-bottom:16px;}
   .skills{list-style:none;display:flex;flex-wrap:wrap;gap:10px;}
   .skills li{
     font-family:'IBM Plex Mono', monospace;font-size:12px;
@@ -174,6 +176,7 @@
     font-family:'Fraunces', serif;font-weight:500;
     font-size:clamp(34px, 4.6vw, 54px);
     max-width:620px;
+    color:var(--accent);
   }
   .contact-links{display:flex;flex-direction:column;gap:14px;font-family:'IBM Plex Mono', monospace;font-size:14px;}
   .contact-links a{color:var(--ink-muted);transition:color .25s;}
@@ -219,13 +222,13 @@
 <section class="hero">
   <div class="groove" aria-hidden="true">
     <svg viewBox="0 0 200 200">
-      <circle cx="100" cy="100" r="98" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.5"/>
-      <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.45"/>
-      <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
-      <circle cx="100" cy="100" r="56" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.35"/>
-      <circle cx="100" cy="100" r="42" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.3"/>
-      <circle class="accent-ring" cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
-      <circle class="accent-dot" cx="100" cy="100" r="6" fill="currentColor"/>
+      <circle cx="100" cy="100" r="98" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
+      <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.5"/>
+      <circle cx="100" cy="100" r="56" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.45"/>
+      <circle cx="100" cy="100" r="42" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.4"/>
+      <circle class="accent-ring" cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="2" opacity="0.8"/>
+      <circle class="accent-dot" cx="100" cy="100" r="7" fill="currentColor"/>
     </svg>
   </div>
   <div class="wrap">
@@ -256,7 +259,7 @@
     <div class="timeline">
 
       <div class="entry">
-        <div class="code">01<span class="years">2024—<span class="fr">présent</span><span class="en">present</span></span></div>
+        <div class="code"><span class="years">2024—<span class="fr">présent</span><span class="en">present</span></span></div>
         <div>
           <h3>Senior Studio Manager</h3>
           <div class="place">SGXgraphics — Paris</div>
@@ -267,7 +270,7 @@
       </div>
 
       <div class="entry">
-        <div class="code">02<span class="years">2016—2024</span></div>
+        <div class="code"><span class="years">2016—2024</span></div>
         <div>
           <h3>Traffic Studio Manager</h3>
           <div class="place">Audioptic Trade Services — Clamart</div>
@@ -278,7 +281,7 @@
       </div>
 
       <div class="entry">
-        <div class="code">03<span class="years">2016</span></div>
+        <div class="code"><span class="years">2016</span></div>
         <div>
           <h3>Studio Coordinator</h3>
           <div class="place">Purple Agency — Paris</div>
@@ -289,7 +292,7 @@
       </div>
 
       <div class="entry">
-        <div class="code">04<span class="years">2012—2016</span></div>
+        <div class="code"><span class="years">2012—2016</span></div>
         <div>
           <h3>Digital Production Manager</h3>
           <div class="place">CIPE — Port Louis</div>
@@ -299,7 +302,7 @@
       </div>
 
       <div class="entry">
-        <div class="code">05<span class="years">2011—2012</span></div>
+        <div class="code"><span class="years">2011—2012</span></div>
         <div>
           <h3>Studio Manager</h3>
           <div class="place">Malakoff Médéric — Paris</div>
@@ -309,7 +312,7 @@
       </div>
 
       <div class="entry">
-        <div class="code">06<span class="years">2011</span></div>
+        <div class="code"><span class="years">2011</span></div>
         <div>
           <h3>Art Production Specialist</h3>
           <div class="place">Unilever Europe — Leatherhead (UK)</div>
@@ -320,7 +323,7 @@
       </div>
 
       <div class="entry">
-        <div class="code">07<span class="years">2009—2011</span></div>
+        <div class="code"><span class="years">2009—2011</span></div>
         <div>
           <h3><span class="fr">Directeur artistique freelance</span><span class="en">Freelance Art Director</span></h3>
           <div class="place">Creative Works — Epsom (UK)</div>
@@ -331,7 +334,7 @@
       </div>
 
       <div class="entry">
-        <div class="code">08<span class="years">2008—2009</span></div>
+        <div class="code"><span class="years">2008—2009</span></div>
         <div>
           <h3><span class="fr">Directeur artistique</span><span class="en">Art Director</span></h3>
           <div class="place">John Brown Media — Londres (UK)</div>
@@ -342,7 +345,7 @@
       </div>
 
       <div class="entry">
-        <div class="code">09<span class="years">2000—2008</span></div>
+        <div class="code"><span class="years">2000—2008</span></div>
         <div>
           <h3><span class="fr">Studio Manager magazine</span><span class="en">Magazine Studio Manager</span></h3>
           <div class="place">CIPL — Luxembourg</div>
@@ -352,7 +355,7 @@
       </div>
 
       <div class="entry">
-        <div class="code">10<span class="years">1994—2000</span></div>
+        <div class="code"><span class="years">1994—2000</span></div>
         <div>
           <h3>Studio Manager</h3>
           <div class="place">Pressimage — Montreuil</div>
@@ -371,8 +374,8 @@
     <div class="about-grid">
       <div>
         <p>
-          <span class="fr"><strong>Thierry Caplat</strong>, Traffic &amp; Studio Manager certifié UX/UI (Pyramyd, 2024), fort de 15 ans à la tête de studios graphiques pour des marques telles que L'Oréal, Orange, Pfizer et Unilever. Formé en communication et publicité (BTS, CFPJ Paris, LPEP Vincennes), je m'appuie sur cette double culture créative et opérationnelle pour orchestrer des projets exigeants, dans le respect des délais et de l'identité visuelle des marques.</span>
-          <span class="en"><strong>Thierry Caplat</strong>, UX/UI-certified Traffic &amp; Studio Manager (Pyramyd, 2024), with 15 years leading graphic studios for brands including L'Oréal, Orange, Pfizer and Unilever. Trained in communication and advertising (BTS, CFPJ Paris, LPEP Vincennes), I bring together creative and operational thinking to run demanding projects on time, without compromising brand identity.</span>
+          <span class="fr">Traffic &amp; Studio Manager certifié UX/UI (Pyramyd, 2024), fort de 15 ans à la tête de studios graphiques pour des marques telles que L'Oréal, Orange, Pfizer et Unilever. Formé en communication et publicité (BTS, CFPJ Paris, LPEP Vincennes), je m'appuie sur cette double culture créative et opérationnelle pour orchestrer des projets exigeants, dans le respect des délais et de l'identité visuelle des marques.</span>
+          <span class="en">UX/UI-certified Traffic &amp; Studio Manager (Pyramyd, 2024), with 15 years leading graphic studios for brands including L'Oréal, Orange, Pfizer and Unilever. Trained in communication and advertising (BTS, CFPJ Paris, LPEP Vincennes), I bring together creative and operational thinking to run demanding projects on time, without compromising brand identity.</span>
         </p>
         <p>
           <span class="fr">En dehors du studio, je restaure de vieilles voitures et motos, je collectionne vinyles, cassettes et objets design du siècle dernier. Cette passion pour redonner vie à des objets anciens nourrit directement ma façon de travailler : chaque projet est une rencontre entre nostalgie et innovation.</span>
