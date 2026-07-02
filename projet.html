@@ -93,6 +93,11 @@
     padding-bottom:14px;-webkit-overflow-scrolling:touch;
     align-items:center;
   }
+  .gallery-row{margin-bottom:32px;}
+  .gallery-row-title{
+    font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px;
+  }
   .gallery-item{
     height:280px;border-radius:4px;overflow:hidden;position:relative;
     background:var(--bg-alt);border:1px solid var(--line);
@@ -232,7 +237,7 @@
 <section>
   <div class="wrap">
     <div class="section-label"><span class="fr">Visuels du projet</span><span class="en">Project visuals</span><div class="rule"></div></div>
-    <div class="gallery" id="gallery"></div>
+    <div id="galleryWrapper"></div>
 
     <div class="section-label" style="margin-top:64px;"><span class="fr">Autres marques</span><span class="en">Other brands</span><div class="rule"></div></div>
     <div class="brand-switch" id="brand-switch"></div>
@@ -317,16 +322,44 @@ const BRANDS = {
       { fr: "Période", en: "Period", value: { fr: "2024 — présent", en: "2024 — present" } },
       { fr: "Agence", en: "Agency", value: { fr: "SGXgraphics, Paris", en: "SGXgraphics, Paris" } }
     ],
-    media: [
-      { type: "image", src: "medias/laroche-posay-gamme.jpg", caption: { fr: "Gamme La Roche-Posay", en: "La Roche-Posay range" } },
-      { type: "image", src: "medias/vichy-liftactiv-collagen.jpg", caption: { fr: "Vichy LiftActiv Collagen Specialist", en: "Vichy LiftActiv Collagen Specialist" } },
-      { type: "image", src: "medias/loreal-revitalift-laser.jpg", caption: { fr: "Revitalift Laser", en: "Revitalift Laser" } },
-      { type: "image", src: "", caption: { fr: "Nouveau visuel", en: "New visual" } },
-      { type: "image", src: "", caption: { fr: "Nouveau visuel", en: "New visual" } },
-      { type: "image", src: "", caption: { fr: "Nouveau visuel", en: "New visual" } },
-      { type: "image", src: "", caption: { fr: "Nouveau visuel", en: "New visual" } },
-      { type: "image", src: "", caption: { fr: "Nouveau visuel", en: "New visual" } },
-      { type: "image", src: "", caption: { fr: "Nouveau visuel", en: "New visual" } }
+    mediaGroups: [
+      {
+        label: { fr: "La Roche-Posay", en: "La Roche-Posay" },
+        media: [
+          { type: "image", src: "medias/laroche-posay-gamme.jpg", caption: { fr: "Gamme La Roche-Posay", en: "La Roche-Posay range" } },
+          { type: "image", src: "medias/lrp-hyalu-b5-anthelios.jpg", caption: { fr: "Hyalu B5 & Anthelios", en: "Hyalu B5 & Anthelios" } },
+          { type: "image", src: "medias/lrp-conseils-experts.jpg", caption: { fr: "Conseils experts produits", en: "Expert product advice" } },
+          { type: "image", src: "medias/lrp-serums-gamme.jpg", caption: { fr: "Gamme sérums", en: "Serums range" } },
+          { type: "image", src: "medias/lrp-routine-offre.jpg", caption: { fr: "Routine offre", en: "Routine offer" } },
+          { type: "image", src: "medias/lrp-refill-campaign.jpg", caption: { fr: "Campagne recharges", en: "Refill campaign" } },
+          { type: "image", src: "medias/laroche-posay-produits-cles.jpg", caption: { fr: "Sélection produits clés", en: "Key products selection" } }
+        ]
+      },
+      {
+        label: { fr: "Vichy", en: "Vichy" },
+        media: [
+          { type: "image", src: "medias/vichy-liftactiv-collagen.jpg", caption: { fr: "Vichy LiftActiv Collagen Specialist", en: "Vichy LiftActiv Collagen Specialist" } },
+          { type: "image", src: "medias/vichy-mineral89-night-cream.jpg", caption: { fr: "Minéral 89 crème de nuit", en: "Minéral 89 night cream" } },
+          { type: "image", src: "medias/vichy-mineral89-booster.jpg", caption: { fr: "Minéral 89 booster quotidien", en: "Minéral 89 daily booster" } },
+          { type: "image", src: "medias/vichy-liftactiv-hyaluronic-specialist.jpg", caption: { fr: "LiftActiv Hyaluronic Specialist", en: "LiftActiv Hyaluronic Specialist" } },
+          { type: "image", src: "medias/vichy-liftactiv-collagen-specialist16.jpg", caption: { fr: "LiftActiv Collagen Specialist 16", en: "LiftActiv Collagen Specialist 16" } },
+          { type: "image", src: "medias/vichy-capital-soleil-range.jpg", caption: { fr: "Gamme Capital Soleil", en: "Capital Soleil range" } },
+          { type: "image", src: "medias/vichy-capital-soleil-oil.jpg", caption: { fr: "Capital Soleil huile invisible", en: "Capital Soleil invisible oil" } },
+          { type: "image", src: "medias/vichy-dercos-refill-pouch.jpg", caption: { fr: "Dercos recharge anti-pelliculaire", en: "Dercos anti-dandruff refill" } },
+          { type: "image", src: "medias/vichy-dercos-anti-dandruff.jpg", caption: { fr: "Dercos shampooing anti-pelliculaire", en: "Dercos anti-dandruff shampoo" } },
+          { type: "image", src: "medias/vichy-dercos-aminexil-serum.jpg", caption: { fr: "Dercos Aminexil R.E.G.E.N. Booster", en: "Dercos Aminexil R.E.G.E.N. Booster" } },
+          { type: "image", src: "medias/vichy-dercos-collagen-filler17.jpg", caption: { fr: "Dercos Collagen Filler 17", en: "Dercos Collagen Filler 17" } },
+          { type: "image", src: "medias/vichy-antiperspirants-trio.jpg", caption: { fr: "Trio anti-transpirants", en: "Anti-perspirants trio" } },
+          { type: "image", src: "medias/vichy-deodorant-soap.jpg", caption: { fr: "Déodorant & savon", en: "Deodorant & soap" } },
+          { type: "image", src: "medias/vichy-purete-thermale-demaquillant.jpg", caption: { fr: "Pureté Thermale démaquillant yeux", en: "Pureté Thermale eye make-up remover" } }
+        ]
+      },
+      {
+        label: { fr: "L'Oréal Paris", en: "L'Oréal Paris" },
+        media: [
+          { type: "image", src: "medias/loreal-revitalift-laser.jpg", caption: { fr: "Revitalift Laser", en: "Revitalift Laser" } }
+        ]
+      }
     ]
   },
   optic2000: {
@@ -510,18 +543,32 @@ function render() {
     <span class="fr">${m.fr}</span><span class="en">${m.en}</span></div>
   `).join("");
 
-  document.getElementById("gallery").innerHTML = brand.media.map(item => {
-    if (!item.src) {
-      return `<div class="gallery-item"><div class="placeholder">
-        <div class="plus">+</div>
-        <small><span class="fr">${item.caption.fr} — ajoute ton fichier dans BRANDS</span><span class="en">${item.caption.en} — add your file in BRANDS</span></small>
-      </div></div>`;
-    }
-    if (item.type === "video") {
-      return `<div class="gallery-item clickable" data-src="${item.src}" data-type="video"><video src="${item.src}" controls></video></div>`;
-    }
-    return `<div class="gallery-item clickable" data-src="${item.src}" data-type="image"><img src="${item.src}" alt="${item.caption.fr}"></div>`;
-  }).join("");
+  function renderGalleryItems(media) {
+    return media.map(item => {
+      if (!item.src) {
+        return `<div class="gallery-item"><div class="placeholder">
+          <div class="plus">+</div>
+          <small><span class="fr">${item.caption.fr} — ajoute ton fichier dans BRANDS</span><span class="en">${item.caption.en} — add your file in BRANDS</span></small>
+        </div></div>`;
+      }
+      if (item.type === "video") {
+        return `<div class="gallery-item clickable" data-src="${item.src}" data-type="video"><video src="${item.src}" controls></video></div>`;
+      }
+      return `<div class="gallery-item clickable" data-src="${item.src}" data-type="image"><img src="${item.src}" alt="${item.caption.fr}"></div>`;
+    }).join("");
+  }
+
+  const wrapper = document.getElementById("galleryWrapper");
+  if (brand.mediaGroups) {
+    wrapper.innerHTML = brand.mediaGroups.map(group => `
+      <div class="gallery-row">
+        <div class="gallery-row-title"><span class="fr">${group.label.fr}</span><span class="en">${group.label.en}</span></div>
+        <div class="gallery">${renderGalleryItems(group.media)}</div>
+      </div>
+    `).join("");
+  } else {
+    wrapper.innerHTML = `<div class="gallery">${renderGalleryItems(brand.media)}</div>`;
+  }
 
   bindLightbox();
 
