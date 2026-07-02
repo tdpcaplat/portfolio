@@ -111,13 +111,6 @@
   }
   .placeholder .plus{font-family:'Fraunces', serif;font-size:32px;color:var(--accent);}
   .placeholder small{font-family:'IBM Plex Mono', monospace;font-size:10px;letter-spacing:0.04em;max-width:200px;}
-  .media-tag{
-    position:absolute;top:8px;left:8px;z-index:2;
-    background:var(--accent);color:#FFFFFF;
-    font-family:'IBM Plex Mono', monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;
-    padding:4px 9px;border-radius:12px;
-    pointer-events:none;
-  }
 
   .lightbox{
     position:fixed;inset:0;z-index:200;
@@ -518,7 +511,6 @@ function render() {
   `).join("");
 
   document.getElementById("gallery").innerHTML = brand.media.map(item => {
-    const tag = item.brand ? `<span class="media-tag">${item.brand}</span>` : "";
     if (!item.src) {
       return `<div class="gallery-item"><div class="placeholder">
         <div class="plus">+</div>
@@ -526,9 +518,9 @@ function render() {
       </div></div>`;
     }
     if (item.type === "video") {
-      return `<div class="gallery-item clickable" data-src="${item.src}" data-type="video">${tag}<video src="${item.src}" controls></video></div>`;
+      return `<div class="gallery-item clickable" data-src="${item.src}" data-type="video"><video src="${item.src}" controls></video></div>`;
     }
-    return `<div class="gallery-item clickable" data-src="${item.src}" data-type="image">${tag}<img src="${item.src}" alt="${item.caption.fr}"></div>`;
+    return `<div class="gallery-item clickable" data-src="${item.src}" data-type="image"><img src="${item.src}" alt="${item.caption.fr}"></div>`;
   }).join("");
 
   bindLightbox();
