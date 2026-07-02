@@ -16,21 +16,23 @@
     --bg:#0424E3;
     --bg-alt:#031C9E;
     --ink:#FFFFFF;
-    --ink-muted: rgba(255,255,255,0.68);
-    --accent:#FF5F10;
-    --accent-2:#FF8A47;
-    --line: rgba(255,95,16,0.25);
+    --ink-muted:#E8E8F0;
+    --accent:#FFA366;
+    --accent-2:#FFB380;
+    --accent-text:var(--accent);
+    --line: rgba(255,163,102,0.25);
     --header-fade: rgba(4,36,227,0.8);
   }
   body.lang-en{
-    --bg:#FF5F10;
-    --bg-alt:#E0500A;
+    --bg:#B8410E;
+    --bg-alt:#8F330A;
     --ink:#FFFFFF;
-    --ink-muted: rgba(255,255,255,0.68);
-    --accent:#0424E3;
-    --accent-2:#4C5FFF;
-    --line: rgba(4,36,227,0.25);
-    --header-fade: rgba(255,95,16,0.8);
+    --ink-muted:#E8E8F0;
+    --accent:#C6D0FF;
+    --accent-2:#E0E5FF;
+    --accent-text:var(--ink);
+    --line: rgba(198,208,255,0.25);
+    --header-fade: rgba(184,65,14,0.8);
   }
   *{margin:0;padding:0;box-sizing:border-box;transition:background-color .45s ease, color .45s ease, border-color .45s ease;}
   html{scroll-behavior:smooth;}
@@ -61,7 +63,7 @@
     z-index:-1;
   }
   header .wrap{display:flex;justify-content:space-between;align-items:center;}
-  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent);}
+  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent-text);}
   .logo span{color:var(--ink);}
   nav{display:flex;align-items:center;gap:40px;}
   nav ul{display:flex;gap:36px;list-style:none;font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}
@@ -78,7 +80,7 @@
     background:none;border:none;color:var(--ink-muted);padding:6px 14px;cursor:pointer;
     font-family:inherit;font-size:inherit;letter-spacing:inherit;transition:color .2s, background .2s;
   }
-  .lang-switch button.active{background:var(--accent);color:#FFFFFF;}
+  .lang-switch button.active{background:var(--accent);color:#0B0B12;}
 
   .hero{
     min-height:100vh;
@@ -151,7 +153,7 @@
   .entry .code{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink);padding-top:4px;}
   .entry .code .years{display:block;color:var(--ink);margin-top:4px;}
   .entry h3{font-family:'Fraunces', serif;font-weight:500;font-size:22px;margin-bottom:4px;color:var(--accent);}
-  .entry .place{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;}
+  .entry .place{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent-text);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;}
   .entry .place .city{color:var(--ink);}
   .entry p{color:var(--ink-muted);font-size:15px;max-width:640px;}
   .entry p .brand{color:var(--accent);font-weight:500;}
@@ -243,8 +245,8 @@
       <span class="en">Bridging<br><em>creativity</em><br>and production.</span>
     </h1>
     <p class="lead">
-      <span class="fr">Traffic &amp; Studio Manager certifié UX/UI, basé à Nice. J'encadre des équipes de designers, je fluidifie les workflows agiles et je garantis la cohérence visuelle de projets menés pour L'Oréal, Optic 2000, Pfizer ou Orange.</span>
-      <span class="en">UX/UI-certified Traffic &amp; Studio Manager, based in Nice, France. I lead design teams, streamline agile workflows and safeguard visual consistency on projects for L'Oréal, Optic 2000, Pfizer and Orange.</span>
+      <span class="fr">Traffic &amp; Studio Manager certifié UX/UI, basé à Nice. J'encadre des équipes de designers, je fluidifie les workflows agiles et je garantis la cohérence visuelle de projets menés pour L'Oréal, Optic 2000, Pfizer ou Orange.</span>
+      <span class="en">UX/UI-certified Traffic &amp; Studio Manager, based in Nice, France. I lead design teams, streamline agile workflows and safeguard visual consistency on projects for L'Oréal, Optic 2000, Pfizer and Orange.</span>
     </p>
     <div class="hero-meta">
       <div><strong>98%</strong><span class="fr">satisfaction client</span><span class="en">client satisfaction</span></div>
@@ -276,8 +278,8 @@
         <div>
           <h3>Traffic Studio Manager</h3>
           <div class="place">Audioptic Trade Services <span class="city">— Clamart</span></div>
-          <p><span class="fr">Pilotage de la production graphique pour <span class="brand">Optic 2000</span>, <span class="brand">Lissac</span> et <span class="brand">Audio 2000</span> : encadrement de 4 designers, plus de 1 000 projets annuels, identité visuelle et campagnes intégrées.</span>
-          <span class="en">Drove graphic production for <span class="brand">Optic 2000</span>, <span class="brand">Lissac</span> and <span class="brand">Audio 2000</span>: managed a team of 4 designers, over 1,000 projects a year, brand identity and integrated campaigns.</span></p>
+          <p><span class="fr">Pilotage de la production graphique pour <span class="brand">Optic 2000</span>, <span class="brand">Lissac</span> et <span class="brand">Audio 2000</span> : encadrement de 4 designers, plus de 1 000 projets annuels, identité visuelle et campagnes intégrées.</span>
+          <span class="en">Drove graphic production for <span class="brand">Optic 2000</span>, <span class="brand">Lissac</span> and <span class="brand">Audio 2000</span>: managed a team of 4 designers, over 1,000 projects a year, brand identity and integrated campaigns.</span></p>
           <a class="case-link" href="projet.html?marque=optic2000"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
