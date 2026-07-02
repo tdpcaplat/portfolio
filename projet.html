@@ -374,21 +374,36 @@ const BRANDS = {
       { fr: "Période", en: "Period", value: { fr: "2016 — 2024", en: "2016 — 2024" } },
       { fr: "Agence", en: "Agency", value: { fr: "Audioptic Trade Services, Clamart", en: "Audioptic Trade Services, Clamart" } }
     ],
-    media: [
-      { type: "image", src: "medias/optic2000-2eme-paire-sport.jpg", brand: "Optic 2000", caption: { fr: "2ème paire Sport", en: "2nd pair Sport" } },
-      { type: "image", src: "medias/optic2000-2eme-paire-optique.jpg", brand: "Optic 2000", caption: { fr: "2ème paire Optique", en: "2nd pair Optical" } },
-      { type: "image", src: "medias/optic2000-supporter-officiel-paris2024.jpg", brand: "Optic 2000", caption: { fr: "Supporter officiel Paris 2024", en: "Official supporter Paris 2024" } },
-      { type: "image", src: "medias/lissac-news-90.jpg", brand: "Lissac", caption: { fr: "Lissac News #90", en: "Lissac News #90" } },
-      { type: "image", src: "medias/lissac-news-89.jpg", brand: "Lissac", caption: { fr: "Lissac News #89", en: "Lissac News #89" } },
-      { type: "image", src: "medias/optic2000-com-optionnelle-homme.jpg", brand: "Optic 2000", caption: { fr: "Communication optionnelle Homme", en: "Optional communication Men" } },
-      { type: "image", src: "medias/optic2000-disney-marvel-avengers-campus.jpg", brand: "Optic 2000", caption: { fr: "Disney × Marvel Avengers Campus", en: "Disney × Marvel Avengers Campus" } },
-      { type: "image", src: "medias/optic2000-x-champion.jpg", brand: "Optic 2000", caption: { fr: "Optic 2000 × Champion", en: "Optic 2000 × Champion" } },
-      { type: "image", src: "medias/optic2000-pack-junior.jpg", brand: "Optic 2000", caption: { fr: "Pack Junior", en: "Junior Pack" } },
-      { type: "video", src: "medias/optic2000-soldes.mp4", brand: "Optic 2000", caption: { fr: "Campagne Soldes", en: "Sales campaign" } },
-      { type: "video", src: "medias/audio2000-bouchons-anti-bruit.mp4", brand: "Audio 2000", caption: { fr: "Bouchons sur-mesure anti-bruit", en: "Custom noise-cancelling earplugs" } },
-      { type: "video", src: "medias/optic2000-rayban-stories-magasin.mp4", brand: "Optic 2000", caption: { fr: "Ray-Ban Stories en magasin", en: "Ray-Ban Stories in-store" } },
-      { type: "video", src: "medias/optic2000-totem-jeunes-actifs.mp4", brand: "Optic 2000", caption: { fr: "Totem jeunes actifs", en: "Young professionals totem" } },
-      { type: "video", src: "medias/optic2000-eyezen.mp4", brand: "Optic 2000", caption: { fr: "Eyezen", en: "Eyezen" } }
+    mediaGroups: [
+      {
+        label: { fr: "Optic 2000", en: "Optic 2000" },
+        media: [
+          { type: "image", src: "medias/optic2000-2eme-paire-sport.jpg", caption: { fr: "2ème paire Sport", en: "2nd pair Sport" } },
+          { type: "image", src: "medias/optic2000-2eme-paire-optique.jpg", caption: { fr: "2ème paire Optique", en: "2nd pair Optical" } },
+          { type: "image", src: "medias/optic2000-supporter-officiel-paris2024.jpg", caption: { fr: "Supporter officiel Paris 2024", en: "Official supporter Paris 2024" } },
+          { type: "image", src: "medias/optic2000-com-optionnelle-homme.jpg", caption: { fr: "Communication optionnelle Homme", en: "Optional communication Men" } },
+          { type: "image", src: "medias/optic2000-disney-marvel-avengers-campus.jpg", caption: { fr: "Disney × Marvel Avengers Campus", en: "Disney × Marvel Avengers Campus" } },
+          { type: "image", src: "medias/optic2000-x-champion.jpg", caption: { fr: "Optic 2000 × Champion", en: "Optic 2000 × Champion" } },
+          { type: "image", src: "medias/optic2000-pack-junior.jpg", caption: { fr: "Pack Junior", en: "Junior Pack" } },
+          { type: "video", src: "medias/optic2000-soldes.mp4", caption: { fr: "Campagne Soldes", en: "Sales campaign" } },
+          { type: "video", src: "medias/optic2000-rayban-stories-magasin.mp4", caption: { fr: "Ray-Ban Stories en magasin", en: "Ray-Ban Stories in-store" } },
+          { type: "video", src: "medias/optic2000-totem-jeunes-actifs.mp4", caption: { fr: "Totem jeunes actifs", en: "Young professionals totem" } },
+          { type: "video", src: "medias/optic2000-eyezen.mp4", caption: { fr: "Eyezen", en: "Eyezen" } }
+        ]
+      },
+      {
+        label: { fr: "Lissac", en: "Lissac" },
+        media: [
+          { type: "image", src: "medias/lissac-news-90.jpg", caption: { fr: "Lissac News #90", en: "Lissac News #90" } },
+          { type: "image", src: "medias/lissac-news-89.jpg", caption: { fr: "Lissac News #89", en: "Lissac News #89" } }
+        ]
+      },
+      {
+        label: { fr: "Audio 2000", en: "Audio 2000" },
+        media: [
+          { type: "video", src: "medias/audio2000-bouchons-anti-bruit.mp4", caption: { fr: "Bouchons sur-mesure anti-bruit", en: "Custom noise-cancelling earplugs" } }
+        ]
+      }
     ]
   },
   pfizer: {
