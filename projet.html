@@ -121,6 +121,7 @@
   }
   .lightbox.open{opacity:1;pointer-events:auto;}
   .lightbox-box{
+    position:relative;
     background:rgba(20,20,24,0.9);
     border:1px solid rgba(255,255,255,0.08);
     border-radius:8px;
@@ -136,12 +137,14 @@
     border-radius:4px;
   }
   .lightbox-close{
-    position:absolute;top:24px;right:32px;
-    background:none;border:none;color:#FFFFFF;
-    font-family:'IBM Plex Mono', monospace;font-size:14px;
-    cursor:pointer;display:flex;align-items:center;gap:8px;
-    opacity:0.8;transition:opacity .2s ease;
+    position:absolute;top:-14px;right:-14px;
+    background:#141418;border:1px solid rgba(255,255,255,0.15);
+    border-radius:50%;width:32px;height:32px;padding:0;
+    color:#FFFFFF;font-size:14px;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    opacity:0.9;transition:opacity .2s ease;
   }
+  .lightbox-close span{display:none;}
   .lightbox-close:hover{opacity:1;}
   .lightbox-arrow{
     position:relative;flex:0 0 auto;
@@ -226,10 +229,12 @@
 </footer>
 
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">✕ <span class="fr">Fermer</span><span class="en">Close</span></button>
   <div class="lightbox-stage">
     <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Précédent">‹</button>
-    <div class="lightbox-box" id="lightboxContent"></div>
+    <div class="lightbox-box">
+      <button class="lightbox-close" id="lightboxClose">✕<span class="fr">Fermer</span><span class="en">Close</span></button>
+      <div id="lightboxContent"></div>
+    </div>
     <button class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Suivant">›</button>
   </div>
 </div>
