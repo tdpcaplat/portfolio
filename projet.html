@@ -19,7 +19,7 @@
     --ink-muted: rgba(255,255,255,0.68);
     --accent:#FF5F10;
     --accent-2:#FF8A47;
-    --line: rgba(255,95,16,0.45);
+    --line: rgba(255,95,16,0.25);
   }
   body.lang-en{
     --bg:#FF5F10;
@@ -28,7 +28,7 @@
     --ink-muted: rgba(255,255,255,0.68);
     --accent:#0424E3;
     --accent-2:#4C5FFF;
-    --line: rgba(4,36,227,0.45);
+    --line: rgba(4,36,227,0.25);
   }
   *{margin:0;padding:0;box-sizing:border-box;transition:background-color .45s ease, color .45s ease, border-color .45s ease;}
   html{scroll-behavior:smooth;}
@@ -140,6 +140,19 @@
     opacity:0.8;transition:opacity .2s ease;
   }
   .lightbox-close:hover{opacity:1;}
+  .lightbox-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);
+    color:#FFFFFF;width:48px;height:48px;border-radius:50%;
+    font-size:20px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease, opacity .2s ease;
+  }
+  .lightbox-arrow:hover{background:rgba(255,255,255,0.25);}
+  .lightbox-arrow:disabled{opacity:0.25;cursor:default;}
+  .lightbox-arrow:disabled:hover{background:rgba(255,255,255,0.1);}
+  .lightbox-prev{left:24px;}
+  .lightbox-next{right:24px;}
 
   .brand-switch{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
   .brand-switch a{
@@ -213,7 +226,9 @@
 
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose">✕ <span class="fr">Fermer</span><span class="en">Close</span></button>
+  <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Précédent">‹</button>
   <div class="lightbox-box" id="lightboxContent"></div>
+  <button class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Suivant">›</button>
 </div>
 
 <script>
@@ -387,11 +402,26 @@ function getParam(name) {
 const lightbox = document.getElementById('lightbox');
 const lightboxContent = document.getElementById('lightboxContent');
 const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
 
-function openLightbox(src, type) {
-  lightboxContent.innerHTML = type === 'video'
-    ? `<video src="${src}" controls autoplay></video>`
-    : `<img src="${src}" alt="">`;
+let currentMediaList = [];
+let currentMediaIndex = 0;
+
+function showLightboxItem(index) {
+  const item = currentMediaList[index];
+  if (!item) return;
+  currentMediaIndex = index;
+  lightboxContent.innerHTML = item.type === 'video'
+    ? `<video src="${item.src}" controls autoplay></video>`
+    : `<img src="${item.src}" alt="">`;
+  lightboxPrev.disabled = index === 0;
+  lightboxNext.disabled = index === currentMediaList.length - 1;
+}
+
+function openLightbox(mediaList, startIndex) {
+  currentMediaList = mediaList;
+  showLightboxItem(startIndex);
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -403,17 +433,24 @@ function closeLightbox() {
 }
 
 function bindLightbox() {
-  document.querySelectorAll('.gallery-item.clickable').forEach(el => {
-    el.addEventListener('click', () => openLightbox(el.dataset.src, el.dataset.type));
+  const items = Array.from(document.querySelectorAll('.gallery-item.clickable'));
+  const mediaList = items.map(el => ({ src: el.dataset.src, type: el.dataset.type }));
+  items.forEach((el, index) => {
+    el.addEventListener('click', () => openLightbox(mediaList, index));
   });
 }
 
+lightboxPrev.addEventListener('click', () => showLightboxItem(currentMediaIndex - 1));
+lightboxNext.addEventListener('click', () => showLightboxItem(currentMediaIndex + 1));
 lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
 document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
   if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') showLightboxItem(currentMediaIndex - 1);
+  if (e.key === 'ArrowRight') showLightboxItem(currentMediaIndex + 1);
 });
 
 function currentLang() {
