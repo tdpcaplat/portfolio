@@ -16,19 +16,21 @@
     --bg:#0424E3;
     --bg-alt:#031C9E;
     --ink:#FFFFFF;
-    --ink-muted: rgba(255,255,255,0.68);
-    --accent:#FF5F10;
-    --accent-2:#FF8A47;
-    --line: rgba(255,95,16,0.25);
+    --ink-muted:#E8E8F0;
+    --accent:#FFA366;
+    --accent-2:#FFB380;
+    --accent-text:var(--accent);
+    --line: rgba(255,163,102,0.25);
   }
   body.lang-en{
-    --bg:#FF5F10;
-    --bg-alt:#E0500A;
+    --bg:#B8410E;
+    --bg-alt:#8F330A;
     --ink:#FFFFFF;
-    --ink-muted: rgba(255,255,255,0.68);
-    --accent:#0424E3;
-    --accent-2:#4C5FFF;
-    --line: rgba(4,36,227,0.25);
+    --ink-muted:#E8E8F0;
+    --accent:#C6D0FF;
+    --accent-2:#E0E5FF;
+    --accent-text:var(--ink);
+    --line: rgba(198,208,255,0.25);
   }
   *{margin:0;padding:0;box-sizing:border-box;transition:background-color .45s ease, color .45s ease, border-color .45s ease;}
   html{scroll-behavior:smooth;}
@@ -52,7 +54,7 @@
 
   header{padding:26px 0;border-bottom:1px solid var(--line);}
   header .wrap{display:flex;justify-content:space-between;align-items:center;}
-  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent);}
+  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent-text);}
   .logo span{color:var(--ink);}
   .back{
     font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;
@@ -64,7 +66,7 @@
     display:flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;
   }
   .lang-switch button{background:none;border:none;color:var(--ink-muted);padding:6px 14px;cursor:pointer;font-family:inherit;font-size:inherit;transition:color .2s, background .2s;}
-  .lang-switch button.active{background:var(--accent);color:#FFFFFF;}
+  .lang-switch button.active{background:var(--accent);color:#0B0B12;}
   .header-inner{display:flex;align-items:center;gap:32px;}
 
   .brand-hero{padding:100px 0 70px;border-bottom:1px solid var(--line);}
@@ -78,7 +80,7 @@
     display:flex;gap:48px;flex-wrap:wrap;margin-top:36px;
     font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink);
   }
-  .brand-meta strong{display:block;color:var(--accent);font-size:14px;margin-bottom:4px;font-family:'Work Sans',sans-serif;font-weight:500;}
+  .brand-meta strong{display:block;color:var(--accent-text);font-size:14px;margin-bottom:4px;font-family:'Work Sans',sans-serif;font-weight:500;}
   .brand-desc{max-width:640px;margin-top:28px;color:var(--ink-muted);font-size:17px;}
 
   section{padding:80px 0;}
@@ -96,7 +98,7 @@
   .gallery-row{margin-bottom:32px;}
   .gallery-row-title{
     font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;
-    color:var(--accent);margin-bottom:14px;
+    color:var(--accent-text);margin-bottom:14px;
   }
   .gallery-item{
     height:280px;border-radius:4px;overflow:hidden;position:relative;
@@ -172,7 +174,7 @@
     font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-muted);
     border:1px solid var(--line);border-radius:16px;padding:7px 14px;transition:color .2s, border-color .2s;
   }
-  .brand-switch a.active{background:var(--accent);color:#FFFFFF;border-color:var(--accent);}
+  .brand-switch a.active{background:var(--accent);color:#0B0B12;border-color:var(--accent);}
   .brand-switch a:hover{color:var(--ink);}
 
   footer{padding:32px 0;font-family:'IBM Plex Mono', monospace;font-size:11px;color:var(--ink-muted);
@@ -363,11 +365,11 @@ const BRANDS = {
     ]
   },
   optic2000: {
-    eyebrow: { fr: "Optic 2000 / Lissac / Audio 2000", en: "Optic 2000 / Lissac / Audio 2000" },
-    title: { fr: "Identité visuelle Optic 2000, Lissac & Audio 2000", en: "Optic 2000, Lissac & Audio 2000 brand identity" },
+    eyebrow: { fr: "Optic 2000 / Lissac / Audio 2000", en: "Optic 2000 / Lissac / Audio 2000" },
+    title: { fr: "Identité visuelle Optic 2000, Lissac & Audio 2000", en: "Optic 2000, Lissac & Audio 2000 brand identity" },
     desc: {
-      fr: "Pilotage de la production graphique pour les trois enseignes du groupe Audioptic Trade Services — Optic 2000, Lissac et Audio 2000 : identité visuelle, campagnes intégrées, encadrement de 4 designers.",
-      en: "Led graphic production for the three retail networks of Audioptic Trade Services — Optic 2000, Lissac and Audio 2000: brand identity, integrated campaigns, team of 4 designers."
+      fr: "Pilotage de la production graphique pour les trois enseignes du groupe Audioptic Trade Services — Optic 2000, Lissac et Audio 2000 : identité visuelle, campagnes intégrées, encadrement de 4 designers.",
+      en: "Led graphic production for the three retail networks of Audioptic Trade Services — Optic 2000, Lissac and Audio 2000: brand identity, integrated campaigns, team of 4 designers."
     },
     meta: [
       { fr: "Rôle", en: "Role", value: { fr: "Traffic Studio Manager", en: "Traffic Studio Manager" } },
@@ -376,14 +378,14 @@ const BRANDS = {
     ],
     mediaGroups: [
       {
-        label: { fr: "Optic 2000", en: "Optic 2000" },
+        label: { fr: "Optic 2000", en: "Optic 2000" },
         media: [
           { type: "image", src: "medias/optic2000-2eme-paire-sport.jpg", caption: { fr: "2ème paire Sport", en: "2nd pair Sport" } },
           { type: "image", src: "medias/optic2000-2eme-paire-optique.jpg", caption: { fr: "2ème paire Optique", en: "2nd pair Optical" } },
           { type: "image", src: "medias/optic2000-supporter-officiel-paris2024.jpg", caption: { fr: "Supporter officiel Paris 2024", en: "Official supporter Paris 2024" } },
           { type: "image", src: "medias/optic2000-com-optionnelle-homme.jpg", caption: { fr: "Communication optionnelle Homme", en: "Optional communication Men" } },
           { type: "image", src: "medias/optic2000-disney-marvel-avengers-campus.jpg", caption: { fr: "Disney × Marvel Avengers Campus", en: "Disney × Marvel Avengers Campus" } },
-          { type: "image", src: "medias/optic2000-x-champion.jpg", caption: { fr: "Optic 2000 × Champion", en: "Optic 2000 × Champion" } },
+          { type: "image", src: "medias/optic2000-x-champion.jpg", caption: { fr: "Optic 2000 × Champion", en: "Optic 2000 × Champion" } },
           { type: "image", src: "medias/optic2000-pack-junior.jpg", caption: { fr: "Pack Junior", en: "Junior Pack" } },
           { type: "video", src: "medias/optic2000-soldes.mp4", caption: { fr: "Campagne Soldes", en: "Sales campaign" } },
           { type: "video", src: "medias/optic2000-rayban-stories-magasin.mp4", caption: { fr: "Ray-Ban Stories en magasin", en: "Ray-Ban Stories in-store" } },
@@ -399,7 +401,7 @@ const BRANDS = {
         ]
       },
       {
-        label: { fr: "Audio 2000", en: "Audio 2000" },
+        label: { fr: "Audio 2000", en: "Audio 2000" },
         media: [
           { type: "video", src: "medias/audio2000-bouchons-anti-bruit.mp4", caption: { fr: "Bouchons sur-mesure anti-bruit", en: "Custom noise-cancelling earplugs" } }
         ]
