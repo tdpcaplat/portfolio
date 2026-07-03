@@ -182,6 +182,19 @@
   .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:start;}
   .about-grid p{color:var(--ink-muted);font-size:17px;margin-bottom:20px;max-width:520px;}
   .about-grid p strong{color:var(--ink);font-weight:500;}
+
+  .portrait-wrap{
+    width:150px;height:150px;position:relative;margin-bottom:32px;
+  }
+  .portrait-wrap::before{
+    content:'';position:absolute;top:-8px;left:-8px;right:8px;bottom:8px;
+    border:1px solid var(--line);border-radius:50%;
+  }
+  .portrait{
+    width:150px;height:150px;border-radius:50%;object-fit:cover;
+    border:2px solid var(--accent);
+    display:block;position:relative;
+  }
   .skills-block{margin-bottom:36px;}
   .skills-block h4{font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink);margin-bottom:16px;}
   .skills{list-style:none;display:flex;flex-wrap:wrap;gap:10px;}
@@ -398,6 +411,9 @@
     <div class="section-label"><span class="fr">À propos &amp; compétences</span><span class="en">About &amp; skills</span><div class="rule"></div></div>
     <div class="about-grid">
       <div>
+        <div class="portrait-wrap">
+          <img class="portrait" src="medias/thierry-caplat-portrait-duotone.jpg" alt="Thierry Caplat">
+        </div>
         <p>
           <span class="fr">Traffic &amp; Studio Manager certifié UX/UI (Pyramyd, 2024), fort de 15 ans à la tête de studios graphiques pour des marques telles que L'Oréal, Orange, Pfizer et Unilever. Formé en communication et publicité (BTS, CFPJ Paris, LPEP Vincennes), je m'appuie sur cette double culture créative et opérationnelle pour orchestrer des projets exigeants, dans le respect des délais et de l'identité visuelle des marques.</span>
           <span class="en">UX/UI-certified Traffic &amp; Studio Manager (Pyramyd, 2024), with 15 years leading graphic studios for brands including L'Oréal, Orange, Pfizer and Unilever. Trained in communication and advertising (BTS, CFPJ Paris, LPEP Vincennes), I bring together creative and operational thinking to run demanding projects on time, without compromising brand identity.</span>
