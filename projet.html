@@ -481,12 +481,12 @@ const BRANDS = {
       { type: "image", src: "medias/orange-environnement-durable.jpg", caption: { fr: "Optons pour un environnement durable", en: "Choosing a sustainable environment" } }
     ]
   },
-  grandscomptes: {
-    eyebrow: { fr: "Alstom, Areva, Schneider Electric, Kimberly-Clark", en: "Alstom, Areva, Schneider Electric, Kimberly-Clark" },
-    title: { fr: "Grands comptes industriels", en: "Industrial key accounts" },
+  areva: {
+    eyebrow: { fr: "Areva T&D", en: "Areva T&D" },
+    title: { fr: "Areva", en: "Areva" },
     desc: {
-      fr: "Conception de supports de communication print multilingues pour de grands groupes industriels, en freelance chez Creative Works.",
-      en: "Designed multilingual print communication materials for major industrial groups, freelancing at Creative Works."
+      fr: "Conception de supports de communication print multilingues pour Areva, en freelance chez Creative Works.",
+      en: "Designed multilingual print communication materials for Areva, freelancing at Creative Works."
     },
     meta: [
       { fr: "Rôle", en: "Role", value: { fr: "Directeur artistique freelance", en: "Freelance Art Director" } },
@@ -494,10 +494,8 @@ const BRANDS = {
       { fr: "Agence", en: "Agency", value: { fr: "Creative Works, Epsom (UK)", en: "Creative Works, Epsom (UK)" } }
     ],
     media: [
-      { type: "image", src: "", caption: { fr: "Brochure Alstom", en: "Alstom brochure" } },
       { type: "image", src: "medias/areva-it-made-easy.png", caption: { fr: "Brochure « IT Made Easy » — Areva T&D", en: "\"IT Made Easy\" brochure — Areva T&D" } },
-      { type: "image", src: "medias/areva-sustainability-way.png", caption: { fr: "AREVA Way — développement durable", en: "AREVA Way — sustainable development" } },
-      { type: "image", src: "", caption: { fr: "Support Schneider Electric", en: "Schneider Electric material" } }
+      { type: "image", src: "medias/areva-sustainability-way.png", caption: { fr: "AREVA Way — développement durable", en: "AREVA Way — sustainable development" } }
     ]
   },
   presse: {
@@ -547,7 +545,7 @@ const BRANDS = {
   }
 };
 
-const BRAND_ORDER = ["loreal", "optic2000", "pfizer", "unilever", "orange", "grandscomptes", "presse", "malakoff"];
+const BRAND_ORDER = ["loreal", "optic2000", "pfizer", "unilever", "orange", "areva", "presse", "malakoff"];
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
