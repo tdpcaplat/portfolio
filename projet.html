@@ -16,21 +16,22 @@
     --bg:#0424E3;
     --bg-alt:#031C9E;
     --ink:#FFFFFF;
-    --ink-muted:#E8E8F0;
-    --accent:#FFA366;
-    --accent-2:#FFB380;
-    --accent-text:var(--accent);
-    --line: rgba(255,163,102,0.25);
+    --ink-muted: rgba(255,255,255,0.68);
+    --accent:#FF5F10;
+    --accent-2:#FF8A47;
+    --accent-text:var(--ink);
+    --accent-ink:#0B0B12;
+    --line: rgba(255,95,16,0.25);
   }
   body.lang-en{
-    --bg:#B8410E;
-    --bg-alt:#8F330A;
+    --bg:#37007A;
+    --bg-alt:#2B0060;
     --ink:#FFFFFF;
-    --ink-muted:#E8E8F0;
-    --accent:#C6D0FF;
-    --accent-2:#E0E5FF;
-    --accent-text:var(--ink);
-    --line: rgba(198,208,255,0.25);
+    --ink-muted: rgba(255,255,255,0.68);
+    --accent:#1CF121;
+    --accent-2:#6AFF6E;
+    --accent-text:var(--accent);
+    --line: rgba(28,241,33,0.25);
   }
   *{margin:0;padding:0;box-sizing:border-box;transition:background-color .45s ease, color .45s ease, border-color .45s ease;}
   html{scroll-behavior:smooth;}
@@ -66,7 +67,7 @@
     display:flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;
   }
   .lang-switch button{background:none;border:none;color:var(--ink-muted);padding:6px 14px;cursor:pointer;font-family:inherit;font-size:inherit;transition:color .2s, background .2s;}
-  .lang-switch button.active{background:var(--accent);color:#0B0B12;}
+  .lang-switch button.active{background:var(--accent);color:var(--accent-ink);}
   .header-inner{display:flex;align-items:center;gap:32px;}
 
   .brand-hero{padding:100px 0 70px;border-bottom:1px solid var(--line);}
@@ -174,7 +175,7 @@
     font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-muted);
     border:1px solid var(--line);border-radius:16px;padding:7px 14px;transition:color .2s, border-color .2s;
   }
-  .brand-switch a.active{background:var(--accent);color:#0B0B12;border-color:var(--accent);}
+  .brand-switch a.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);}
   .brand-switch a:hover{color:var(--ink);}
 
   footer{padding:32px 0;font-family:'IBM Plex Mono', monospace;font-size:11px;color:var(--ink-muted);
@@ -316,8 +317,8 @@ const BRANDS = {
     eyebrow: { fr: "L'Oréal — La Roche-Posay / Vichy", en: "L'Oréal — La Roche-Posay / Vichy" },
     title: { fr: "Packaging L'Oréal", en: "L'Oréal packaging" },
     desc: {
-      fr: "Studio packaging de 5 designers seniors pour les marques La Roche-Posay et Vichy chez SGXgraphics : plus de 1 000 projets par an, 98 % de satisfaction client.",
-      en: "5-designer packaging studio for La Roche-Posay and Vichy at SGXgraphics: over 1,000 projects a year, 98% client satisfaction."
+      fr: "Direction d'un studio packaging de 5 designers seniors pour les marques La Roche-Posay et Vichy chez SGXgraphics : plus de 1 000 projets par an, 98 % de satisfaction client.",
+      en: "Leading a 5-designer packaging studio for the La Roche-Posay and Vichy brands at SGXgraphics: over 1,000 projects a year, 98% client satisfaction."
     },
     meta: [
       { fr: "Rôle", en: "Role", value: { fr: "Senior Studio Manager", en: "Senior Studio Manager" } },
