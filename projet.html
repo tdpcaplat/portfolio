@@ -112,6 +112,25 @@
   .gallery-item img, .gallery-item video{height:100%;width:auto;max-width:none;object-fit:contain;display:block;transition:transform .5s ease;}
   .gallery-item.clickable{cursor:zoom-in;}
   .gallery-item.clickable:hover img, .gallery-item.clickable:hover video{transform:scale(1.06);}
+
+  .gallery-item.video-item{position:relative;}
+  .gallery-item.video-item .play-badge{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:56px;height:56px;border-radius:50%;
+    background:rgba(0,0,0,0.55);
+    display:flex;align-items:center;justify-content:center;
+    pointer-events:none;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .gallery-item.video-item .play-badge::after{
+    content:'';
+    border-style:solid;
+    border-width:9px 0 9px 15px;
+    border-color:transparent transparent transparent var(--ink);
+    margin-left:4px;
+  }
+  .gallery-item.video-item:hover .play-badge{background:var(--accent);transform:translate(-50%,-50%) scale(1.08);}
+  .gallery-item.video-item:hover .play-badge::after{border-color:transparent transparent transparent var(--accent-ink, #0B0B12);}
   .placeholder{
     width:210px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
     gap:10px;color:var(--ink-muted);text-align:center;padding:20px;
@@ -388,10 +407,10 @@ const BRANDS = {
           { type: "image", src: "medias/optic2000-disney-marvel-avengers-campus.jpg", caption: { fr: "Disney × Marvel Avengers Campus", en: "Disney × Marvel Avengers Campus" } },
           { type: "image", src: "medias/optic2000-x-champion.jpg", caption: { fr: "Optic 2000 × Champion", en: "Optic 2000 × Champion" } },
           { type: "image", src: "medias/optic2000-pack-junior.jpg", caption: { fr: "Pack Junior", en: "Junior Pack" } },
-          { type: "video", src: "medias/optic2000-soldes.mp4", caption: { fr: "Campagne Soldes", en: "Sales campaign" } },
-          { type: "video", src: "medias/optic2000-rayban-stories-magasin.mp4", caption: { fr: "Ray-Ban Stories en magasin", en: "Ray-Ban Stories in-store" } },
-          { type: "video", src: "medias/optic2000-totem-jeunes-actifs.mp4", caption: { fr: "Totem jeunes actifs", en: "Young professionals totem" } },
-          { type: "video", src: "medias/optic2000-eyezen.mp4", caption: { fr: "Eyezen", en: "Eyezen" } }
+          { type: "video", src: "medias/optic2000-soldes.mp4", poster: "medias/optic2000-soldes-poster.jpg", caption: { fr: "Campagne Soldes", en: "Sales campaign" } },
+          { type: "video", src: "medias/optic2000-rayban-stories-magasin.mp4", poster: "medias/optic2000-rayban-stories-magasin-poster.jpg", caption: { fr: "Ray-Ban Stories en magasin", en: "Ray-Ban Stories in-store" } },
+          { type: "video", src: "medias/optic2000-totem-jeunes-actifs.mp4", poster: "medias/optic2000-totem-jeunes-actifs-poster.jpg", caption: { fr: "Totem jeunes actifs", en: "Young professionals totem" } },
+          { type: "video", src: "medias/optic2000-eyezen.mp4", poster: "medias/optic2000-eyezen-poster.jpg", caption: { fr: "Eyezen", en: "Eyezen" } }
         ]
       },
       {
@@ -404,7 +423,7 @@ const BRANDS = {
           { type: "image", src: "medias/lissac-club-family-parrainage.jpg", caption: { fr: "Club Lissac Family — parrainage", en: "Lissac Family Club — referral programme" } },
           { type: "image", src: "medias/lissac-test-vue-famille.jpg", caption: { fr: "Test de vue pour toute la famille", en: "Family eye test" } },
           { type: "image", src: "medias/lissac-ventes-privees.png", caption: { fr: "Ventes privées Lissac", en: "Lissac private sales" } },
-          { type: "video", src: "medias/lissac-diagnostic-365.mp4", caption: { fr: "Le Diagnostic 365 — en savoir plus sur vous", en: "The 365 Diagnostic — getting to know you better" } }
+          { type: "video", src: "medias/lissac-diagnostic-365.mp4", poster: "medias/lissac-diagnostic-365-poster.jpg", caption: { fr: "Le Diagnostic 365 — en savoir plus sur vous", en: "The 365 Diagnostic — getting to know you better" } }
         ]
       },
       {
@@ -412,7 +431,7 @@ const BRANDS = {
         media: [
           { type: "image", src: "medias/audio2000-frequences-newsletter-noel.jpg", caption: { fr: "Fréquences — newsletter de fin d'année", en: "Fréquences — year-end newsletter" } },
           { type: "image", src: "medias/audio2000-acouphenes-superhero.jpg", caption: { fr: "Campagne acouphènes & surdité", en: "Tinnitus & hearing loss campaign" } },
-          { type: "video", src: "medias/audio2000-bouchons-anti-bruit.mp4", caption: { fr: "Bouchons sur-mesure anti-bruit", en: "Custom noise-cancelling earplugs" } }
+          { type: "video", src: "medias/audio2000-bouchons-anti-bruit.mp4", poster: "medias/audio2000-bouchons-anti-bruit-poster.jpg", caption: { fr: "Bouchons sur-mesure anti-bruit", en: "Custom noise-cancelling earplugs" } }
         ]
       }
     ]
@@ -635,7 +654,8 @@ function render() {
         </div></div>`;
       }
       if (item.type === "video") {
-        return `<div class="gallery-item clickable" data-src="${item.src}" data-type="video"><video src="${item.src}" controls></video></div>`;
+        const posterAttr = item.poster ? ` poster="${item.poster}"` : "";
+        return `<div class="gallery-item video-item clickable" data-src="${item.src}" data-type="video"><video src="${item.src}"${posterAttr} preload="metadata" muted></video><span class="play-badge" aria-hidden="true"></span></div>`;
       }
       return `<div class="gallery-item clickable" data-src="${item.src}" data-type="image"><img src="${item.src}" alt="${item.caption.fr}"></div>`;
     }).join("");
