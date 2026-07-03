@@ -132,9 +132,8 @@
     background:var(--bg-alt);border:1px solid var(--line);
     flex:0 0 auto;scroll-snap-align:start;
   }
-  .gallery::-webkit-scrollbar{height:6px;}
-  .gallery::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
-  .gallery::-webkit-scrollbar-track{background:var(--line);}
+  .gallery{scrollbar-width:none;-ms-overflow-style:none;}
+  .gallery::-webkit-scrollbar{display:none;}
   .gallery-item img, .gallery-item video{height:100%;width:auto;max-width:none;object-fit:contain;display:block;transition:transform .5s ease;}
   .gallery-item.clickable{cursor:zoom-in;}
   .gallery-item.clickable:hover img, .gallery-item.clickable:hover video{transform:scale(1.06);}
