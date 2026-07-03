@@ -89,6 +89,34 @@
     position:relative;
     padding-top:100px;
   }
+
+  @keyframes fadeUpIn{
+    from{opacity:0;transform:translateY(18px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .hero .eyebrow, .hero h1, .hero p.lead, .hero .hero-meta, .hero .hero-cta{
+    opacity:0;
+    animation:fadeUpIn .8s cubic-bezier(.22,.68,0,1) forwards;
+  }
+  .hero .eyebrow{animation-delay:.05s;}
+  .hero h1{animation-delay:.2s;}
+  .hero p.lead{animation-delay:.42s;}
+  .hero .hero-meta{animation-delay:.6s;}
+  .hero .hero-cta{animation-delay:.75s;}
+
+  .entry{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity .7s cubic-bezier(.22,.68,0,1), transform .7s cubic-bezier(.22,.68,0,1);
+  }
+  .entry.in-view{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .hero .eyebrow, .hero h1, .hero p.lead, .hero .hero-meta, .hero .hero-cta{
+      opacity:1;animation:none;
+    }
+    .entry{opacity:1;transform:none;transition:none;}
+  }
   .groove{
     position:fixed;right:-120px;top:12%;
     width:520px;height:520px;
@@ -489,6 +517,23 @@
   const groove = document.querySelector('.groove');
   const rings = document.querySelectorAll('.groove .ring');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const entries = document.querySelectorAll('.entry');
+  if (entries.length) {
+    if (prefersReducedMotion) {
+      entries.forEach(entry => entry.classList.add('in-view'));
+    } else {
+      const revealObserver = new IntersectionObserver((observed) => {
+        observed.forEach(item => {
+          if (item.isIntersecting) {
+            item.target.classList.add('in-view');
+            revealObserver.unobserve(item.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      entries.forEach(entry => revealObserver.observe(entry));
+    }
+  }
 
   if (groove && rings.length && !prefersReducedMotion) {
     let ticking = false;
