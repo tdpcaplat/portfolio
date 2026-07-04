@@ -54,7 +54,8 @@
   .groove .accent-dot{color:var(--accent);}
 
   header{padding:26px 0;border-bottom:1px solid var(--line);}
-  header .wrap{display:flex;justify-content:space-between;align-items:center;}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  .header-actions{display:flex;align-items:center;gap:14px;flex-shrink:0;}
   .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent-text);}
   .logo span{color:var(--ink);}
   .back{
@@ -250,6 +251,7 @@
   @media (max-width:760px){
     .header-inner{gap:16px;}
     .menu-toggle{display:flex;}
+    .back .fr, .back .en{display:none;}
     .groove{display:none;}
     .gallery{
       flex-direction:column;
@@ -288,13 +290,15 @@
       <div class="logo">THIERRY<span>·</span>CAPLAT</div>
       <a class="back" href="index.html">← <span class="fr">Retour au portfolio</span><span class="en">Back to portfolio</span></a>
     </div>
-    <div class="lang-switch" role="group" aria-label="Langue / Language">
-      <button type="button" class="active" data-lang="fr">FR</button>
-      <button type="button" data-lang="en">EN</button>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Langue / Language">
+        <button type="button" class="active" data-lang="fr">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
