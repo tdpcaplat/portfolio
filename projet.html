@@ -19,19 +19,16 @@
     --ink-muted: rgba(255,255,255,0.68);
     --accent:#FF5F10;
     --accent-2:#FF8A47;
-    --accent-text:var(--ink);
-    --accent-ink:#0B0B12;
     --line: rgba(255,95,16,0.25);
   }
   body.lang-en{
-    --bg:#37007A;
-    --bg-alt:#2B0060;
+    --bg:#FF5F10;
+    --bg-alt:#E0500A;
     --ink:#FFFFFF;
     --ink-muted: rgba(255,255,255,0.68);
-    --accent:#1CF121;
-    --accent-2:#6AFF6E;
-    --accent-text:var(--accent);
-    --line: rgba(28,241,33,0.25);
+    --accent:#0424E3;
+    --accent-2:#4C5FFF;
+    --line: rgba(4,36,227,0.25);
   }
   *{margin:0;padding:0;box-sizing:border-box;transition:background-color .45s ease, color .45s ease, border-color .45s ease;}
   html{scroll-behavior:smooth;}
@@ -54,9 +51,8 @@
   .groove .accent-dot{color:var(--accent);}
 
   header{padding:26px 0;border-bottom:1px solid var(--line);}
-  header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;}
-  .header-actions{display:flex;align-items:center;gap:14px;flex-shrink:0;}
-  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent-text);}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;}
+  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent);}
   .logo span{color:var(--ink);}
   .back{
     font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;
@@ -68,58 +64,10 @@
     display:flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;
   }
   .lang-switch button{background:none;border:none;color:var(--ink-muted);padding:6px 14px;cursor:pointer;font-family:inherit;font-size:inherit;transition:color .2s, background .2s;}
-  .lang-switch button.active{background:var(--accent);color:var(--accent-ink);}
+  .lang-switch button.active{background:var(--accent);color:#FFFFFF;}
   .header-inner{display:flex;align-items:center;gap:32px;}
 
-  .menu-toggle{
-    display:none;
-    flex-direction:column;justify-content:center;gap:5px;
-    width:32px;height:32px;background:none;border:none;cursor:pointer;padding:0;
-    position:relative;z-index:60;
-  }
-  .menu-toggle span{display:block;width:100%;height:2px;background:var(--ink);transition:transform .25s ease, opacity .25s ease;}
-  .menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-  .menu-toggle.open span:nth-child(2){opacity:0;}
-  .menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-
-  .mobile-nav{
-    display:none;
-    position:fixed;inset:0;z-index:49;
-    background:var(--bg);
-    flex-direction:column;align-items:flex-start;justify-content:center;
-    padding:0 32px;
-  }
-  .mobile-nav.open{display:flex;}
-  .mobile-nav ul{list-style:none;display:flex;flex-direction:column;gap:26px;width:100%;}
-  .mobile-nav a{font-family:'Fraunces', serif;font-weight:500;font-size:30px;color:var(--ink);}
-
-  .brand-hero{padding:56px 0 44px;border-bottom:1px solid var(--line);}
-
-  @keyframes fadeUpIn{
-    from{opacity:0;transform:translateY(18px);}
-    to{opacity:1;transform:translateY(0);}
-  }
-  #brand-eyebrow, #brand-title, .brand-desc, #brand-meta{
-    opacity:0;
-    animation:fadeUpIn .8s cubic-bezier(.22,.68,0,1) forwards;
-  }
-  #brand-eyebrow{animation-delay:.05s;}
-  #brand-title{animation-delay:.2s;}
-  .brand-desc{animation-delay:.4s;}
-  #brand-meta{animation-delay:.55s;}
-
-  .gallery-item{
-    opacity:0;
-    transform:translateY(20px);
-    transition:opacity .6s cubic-bezier(.22,.68,0,1), transform .6s cubic-bezier(.22,.68,0,1);
-  }
-  .gallery-item.in-view{opacity:1;transform:translateY(0);}
-
-  @media (prefers-reduced-motion: reduce){
-    #brand-eyebrow, #brand-title, .brand-desc, #brand-meta{opacity:1;animation:none;}
-    .gallery-item{opacity:1;transform:none;transition:none;}
-  }
-
+  .brand-hero{padding:100px 0 70px;border-bottom:1px solid var(--line);}
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
     color:var(--ink);margin-bottom:20px;display:flex;align-items:center;gap:10px;
@@ -130,10 +78,10 @@
     display:flex;gap:48px;flex-wrap:wrap;margin-top:36px;
     font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink);
   }
-  .brand-meta strong{display:block;color:var(--accent-text);font-size:14px;margin-bottom:4px;font-family:'Work Sans',sans-serif;font-weight:500;}
+  .brand-meta strong{display:block;color:var(--accent);font-size:14px;margin-bottom:4px;font-family:'Work Sans',sans-serif;font-weight:500;}
   .brand-desc{max-width:640px;margin-top:28px;color:var(--ink-muted);font-size:17px;}
 
-  section{padding:48px 0;}
+  section{padding:80px 0;}
   .section-label{
     font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
     color:var(--ink);display:flex;align-items:baseline;gap:14px;margin-bottom:40px;
@@ -148,37 +96,19 @@
   .gallery-row{margin-bottom:32px;}
   .gallery-row-title{
     font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;
-    color:var(--accent-text);margin-bottom:14px;
+    color:var(--accent);margin-bottom:14px;
   }
   .gallery-item{
     height:280px;border-radius:4px;overflow:hidden;position:relative;
     background:var(--bg-alt);border:1px solid var(--line);
     flex:0 0 auto;scroll-snap-align:start;
   }
-  .gallery{scrollbar-width:none;-ms-overflow-style:none;}
-  .gallery::-webkit-scrollbar{display:none;}
+  .gallery::-webkit-scrollbar{height:6px;}
+  .gallery::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+  .gallery::-webkit-scrollbar-track{background:var(--line);}
   .gallery-item img, .gallery-item video{height:100%;width:auto;max-width:none;object-fit:contain;display:block;transition:transform .5s ease;}
   .gallery-item.clickable{cursor:zoom-in;}
   .gallery-item.clickable:hover img, .gallery-item.clickable:hover video{transform:scale(1.06);}
-
-  .gallery-item.video-item{position:relative;}
-  .gallery-item.video-item .play-badge{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    width:56px;height:56px;border-radius:50%;
-    background:rgba(0,0,0,0.55);
-    display:flex;align-items:center;justify-content:center;
-    pointer-events:none;
-    transition:background .2s ease, transform .2s ease;
-  }
-  .gallery-item.video-item .play-badge::after{
-    content:'';
-    border-style:solid;
-    border-width:9px 0 9px 15px;
-    border-color:transparent transparent transparent var(--ink);
-    margin-left:4px;
-  }
-  .gallery-item.video-item:hover .play-badge{background:var(--accent);transform:translate(-50%,-50%) scale(1.08);}
-  .gallery-item.video-item:hover .play-badge::after{border-color:transparent transparent transparent var(--accent-ink, #0B0B12);}
   .placeholder{
     width:210px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
     gap:10px;color:var(--ink-muted);text-align:center;padding:20px;
@@ -242,7 +172,7 @@
     font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-muted);
     border:1px solid var(--line);border-radius:16px;padding:7px 14px;transition:color .2s, border-color .2s;
   }
-  .brand-switch a.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);}
+  .brand-switch a.active{background:var(--accent);color:#FFFFFF;border-color:var(--accent);}
   .brand-switch a:hover{color:var(--ink);}
 
   footer{padding:32px 0;font-family:'IBM Plex Mono', monospace;font-size:11px;color:var(--ink-muted);
@@ -250,8 +180,6 @@
 
   @media (max-width:760px){
     .header-inner{gap:16px;}
-    .menu-toggle{display:flex;}
-    .back .fr, .back .en{display:none;}
     .groove{display:none;}
     .gallery{
       flex-direction:column;
@@ -290,26 +218,12 @@
       <div class="logo">THIERRY<span>·</span>CAPLAT</div>
       <a class="back" href="index.html">← <span class="fr">Retour au portfolio</span><span class="en">Back to portfolio</span></a>
     </div>
-    <div class="header-actions">
-      <div class="lang-switch" role="group" aria-label="Langue / Language">
-        <button type="button" class="active" data-lang="fr">FR</button>
-        <button type="button" data-lang="en">EN</button>
-      </div>
-      <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
-        <span></span><span></span><span></span>
-      </button>
+    <div class="lang-switch" role="group" aria-label="Langue / Language">
+      <button type="button" class="active" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
     </div>
   </div>
 </header>
-
-<div class="mobile-nav" id="mobileNav">
-  <ul>
-    <li><a href="index.html"><span class="fr">Retour au portfolio</span><span class="en">Back to portfolio</span></a></li>
-    <li><a href="index.html#parcours"><span class="fr">Parcours</span><span class="en">Career</span></a></li>
-    <li><a href="index.html#competences"><span class="fr">Compétences</span><span class="en">Skills</span></a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-  </ul>
-</div>
 
 <section class="brand-hero">
   <div class="wrap">
@@ -396,25 +310,46 @@
    ============================================================ */
 
 const BRANDS = {
+  lepetitmarseillais: {
+    eyebrow: { fr: "Le Petit Marseillais — Johnson & Johnson", en: "Le Petit Marseillais — Johnson & Johnson" },
+    title: { fr: "Packaging Le Petit Marseillais", en: "Le Petit Marseillais packaging" },
+    desc: {
+      fr: "Rôle de conseil et de service pour la coordination des projets packaging européens de la marque Le Petit Marseillais (Johnson & Johnson), en parallèle de la direction du studio L'Oréal chez SGXgraphics.",
+      en: "Advisory and service role coordinating European packaging projects for the Le Petit Marseillais brand (Johnson & Johnson), alongside leading the L'Oréal studio at SGXgraphics."
+    },
+    meta: [
+      { fr: "Rôle", en: "Role", value: { fr: "Conseil & coordination packaging Europe", en: "Advisory & European packaging coordination" } },
+      { fr: "Période", en: "Period", value: { fr: "2024 — présent", en: "2024 — present" } },
+      { fr: "Agence", en: "Agency", value: { fr: "SGXgraphics, Paris", en: "SGXgraphics, Paris" } }
+    ],
+    media: [
+      { type: "image", src: "medias/lepetitmarseillais-creme-douche-vanille-bio.jpg", caption: { fr: "Crème de douche extra douce Lait de Vanille Bio", en: "Extra soft shower cream, Organic Vanilla Milk" } },
+      { type: "image", src: "medias/lepetitmarseillais-creme-douche-coton-coquelicot-bio.jpg", caption: { fr: "Crème de douche extra douce Coton & Coquelicot Bio", en: "Extra soft shower cream, Organic Cotton & Poppy" } },
+      { type: "image", src: "medias/lepetitmarseillais-gel-douche-fleur-bleuet-bio.jpg", caption: { fr: "Gel douche apaisant Haute Tolérance, Fleur de Bleuet Bio", en: "Soothing High Tolerance shower gel, Organic Cornflower" } },
+      { type: "image", src: "medias/lepetitmarseillais-shampooing-argile-blanche.jpg", caption: { fr: "Shampooing équilibrant purifiant, Poudre d'Argile Blanche", en: "Balancing purifying shampoo, White Clay Powder" } },
+      { type: "image", src: "medias/lepetitmarseillais-lait-sublimant-abricot.jpg", caption: { fr: "Lait soin hydratant nacré Sublimant, Abricot", en: "Sublimating pearly moisturising body milk, Apricot" } },
+      { type: "image", src: "medias/lepetitmarseillais-gel-douche-pin-maritime-eucalyptus-ecopack.jpg", caption: { fr: "Écopack recharge 4 en 1 Pin Maritime & Eucalyptus", en: "4-in-1 refill Ecopack, Maritime Pine & Eucalyptus" } },
+      { type: "image", src: "medias/lepetitmarseillais-baume-levres-nutrition-duo.jpg", caption: { fr: "Duo baumes à lèvres Nutrition, Karité, Amande Douce & Argan", en: "Nutrition lip balm duo, Shea Butter, Sweet Almond & Argan" } }
+    ]
+  },
   loreal: {
     eyebrow: { fr: "L'Oréal — La Roche-Posay / Vichy", en: "L'Oréal — La Roche-Posay / Vichy" },
     title: { fr: "Packaging L'Oréal", en: "L'Oréal packaging" },
     desc: {
-      fr: "Direction d'un studio packaging de 5&nbsp;designers seniors pour les marques La Roche-Posay et Vichy chez SGXgraphics&nbsp;: plus de 1&nbsp;000 projets par an, 98&nbsp;% de satisfaction client.",
-      en: "Leading a 5-designer packaging studio for the La Roche-Posay and Vichy brands at SGXgraphics: over 1,000 projects a year, 98% client satisfaction."
+      fr: "Studio packaging de 5 designers seniors pour les marques La Roche-Posay et Vichy chez SGXgraphics : plus de 1 000 projets par an, 98 % de satisfaction client.",
+      en: "5-designer packaging studio for La Roche-Posay and Vichy at SGXgraphics: over 1,000 projects a year, 98% client satisfaction."
     },
     meta: [
       { fr: "Rôle", en: "Role", value: { fr: "Senior Studio Manager", en: "Senior Studio Manager" } },
       { fr: "Période", en: "Period", value: { fr: "2024 — présent", en: "2024 — present" } },
-      { fr: "Agence", en: "Agency", value: { fr: "SGXgraphics, Paris", en: "SGXgraphics, Paris" } },
-      { fr: "Technique(s)", en: "Technique(s)", value: { fr: "Packaging / Print / Esko", en: "Packaging / Print / Esko" } }
+      { fr: "Agence", en: "Agency", value: { fr: "SGXgraphics, Paris", en: "SGXgraphics, Paris" } }
     ],
     mediaGroups: [
       {
         label: { fr: "La Roche-Posay", en: "La Roche-Posay" },
         media: [
           { type: "image", src: "medias/laroche-posay-gamme.jpg", caption: { fr: "Gamme La Roche-Posay", en: "La Roche-Posay range" } },
-          { type: "image", src: "medias/lrp-hyalu-b5-anthelios.jpg", caption: { fr: "Hyalu B5 & Anthelios", en: "Hyalu B5 & Anthelios" } },
+          { type: "image", src: "medias/lrp-hyalu-b5-anthelios.jpg", caption: { fr: "Hyalu B5 & Anthelios", en: "Hyalu B5 & Anthelios" } },
           { type: "image", src: "medias/lrp-conseils-experts.jpg", caption: { fr: "Conseils experts produits", en: "Expert product advice" } },
           { type: "image", src: "medias/lrp-serums-gamme.jpg", caption: { fr: "Gamme sérums", en: "Serums range" } },
           { type: "image", src: "medias/lrp-routine-offre.jpg", caption: { fr: "Routine offre", en: "Routine offer" } },
@@ -426,8 +361,8 @@ const BRANDS = {
         label: { fr: "Vichy", en: "Vichy" },
         media: [
           { type: "image", src: "medias/vichy-liftactiv-collagen.jpg", caption: { fr: "Vichy LiftActiv Collagen Specialist", en: "Vichy LiftActiv Collagen Specialist" } },
-          { type: "image", src: "medias/vichy-mineral89-night-cream.jpg", caption: { fr: "Minéral 89&nbsp;crème de nuit", en: "Minéral 89 night cream" } },
-          { type: "image", src: "medias/vichy-mineral89-booster.jpg", caption: { fr: "Minéral 89&nbsp;booster quotidien", en: "Minéral 89 daily booster" } },
+          { type: "image", src: "medias/vichy-mineral89-night-cream.jpg", caption: { fr: "Minéral 89 crème de nuit", en: "Minéral 89 night cream" } },
+          { type: "image", src: "medias/vichy-mineral89-booster.jpg", caption: { fr: "Minéral 89 booster quotidien", en: "Minéral 89 daily booster" } },
           { type: "image", src: "medias/vichy-liftactiv-hyaluronic-specialist.jpg", caption: { fr: "LiftActiv Hyaluronic Specialist", en: "LiftActiv Hyaluronic Specialist" } },
           { type: "image", src: "medias/vichy-liftactiv-collagen-specialist16.jpg", caption: { fr: "LiftActiv Collagen Specialist 16", en: "LiftActiv Collagen Specialist 16" } },
           { type: "image", src: "medias/vichy-capital-soleil-range.jpg", caption: { fr: "Gamme Capital Soleil", en: "Capital Soleil range" } },
@@ -437,7 +372,7 @@ const BRANDS = {
           { type: "image", src: "medias/vichy-dercos-aminexil-serum.jpg", caption: { fr: "Dercos Aminexil R.E.G.E.N. Booster", en: "Dercos Aminexil R.E.G.E.N. Booster" } },
           { type: "image", src: "medias/vichy-dercos-collagen-filler17.jpg", caption: { fr: "Dercos Collagen Filler 17", en: "Dercos Collagen Filler 17" } },
           { type: "image", src: "medias/vichy-antiperspirants-trio.jpg", caption: { fr: "Trio anti-transpirants", en: "Anti-perspirants trio" } },
-          { type: "image", src: "medias/vichy-deodorant-soap.jpg", caption: { fr: "Déodorant & savon", en: "Deodorant & soap" } },
+          { type: "image", src: "medias/vichy-deodorant-soap.jpg", caption: { fr: "Déodorant & savon", en: "Deodorant & soap" } },
           { type: "image", src: "medias/vichy-purete-thermale-demaquillant.jpg", caption: { fr: "Pureté Thermale démaquillant yeux", en: "Pureté Thermale eye make-up remover" } }
         ]
       },
@@ -451,16 +386,15 @@ const BRANDS = {
   },
   optic2000: {
     eyebrow: { fr: "Optic 2000 / Lissac / Audio 2000", en: "Optic 2000 / Lissac / Audio 2000" },
-    title: { fr: "Identité visuelle Optic 2000, Lissac & Audio 2000", en: "Optic 2000, Lissac & Audio 2000 brand identity" },
+    title: { fr: "Identité visuelle Optic 2000, Lissac & Audio 2000", en: "Optic 2000, Lissac & Audio 2000 brand identity" },
     desc: {
-      fr: "Pilotage de la production graphique pour les trois enseignes du groupe Audioptic Trade Services — Optic 2000, Lissac et Audio 2000&nbsp;: identité visuelle, campagnes intégrées, encadrement de 4&nbsp;designers.",
+      fr: "Pilotage de la production graphique pour les trois enseignes du groupe Audioptic Trade Services — Optic 2000, Lissac et Audio 2000 : identité visuelle, campagnes intégrées, encadrement de 4 designers.",
       en: "Led graphic production for the three retail networks of Audioptic Trade Services — Optic 2000, Lissac and Audio 2000: brand identity, integrated campaigns, team of 4 designers."
     },
     meta: [
       { fr: "Rôle", en: "Role", value: { fr: "Traffic Studio Manager", en: "Traffic Studio Manager" } },
       { fr: "Période", en: "Period", value: { fr: "2016 — 2024", en: "2016 — 2024" } },
-      { fr: "Agence", en: "Agency", value: { fr: "Audioptic Trade Services, Clamart", en: "Audioptic Trade Services, Clamart" } },
-      { fr: "Technique(s)", en: "Technique(s)", value: { fr: "Print / Web / Motion design", en: "Print / Web / Motion design" } }
+      { fr: "Agence", en: "Agency", value: { fr: "Audioptic Trade Services, Clamart", en: "Audioptic Trade Services, Clamart" } }
     ],
     mediaGroups: [
       {
@@ -473,31 +407,23 @@ const BRANDS = {
           { type: "image", src: "medias/optic2000-disney-marvel-avengers-campus.jpg", caption: { fr: "Disney × Marvel Avengers Campus", en: "Disney × Marvel Avengers Campus" } },
           { type: "image", src: "medias/optic2000-x-champion.jpg", caption: { fr: "Optic 2000 × Champion", en: "Optic 2000 × Champion" } },
           { type: "image", src: "medias/optic2000-pack-junior.jpg", caption: { fr: "Pack Junior", en: "Junior Pack" } },
-          { type: "video", src: "medias/optic2000-soldes.mp4", poster: "medias/optic2000-soldes-poster.jpg", caption: { fr: "Campagne Soldes", en: "Sales campaign" } },
-          { type: "video", src: "medias/optic2000-rayban-stories-magasin.mp4", poster: "medias/optic2000-rayban-stories-magasin-poster.jpg", caption: { fr: "Ray-Ban Stories en magasin", en: "Ray-Ban Stories in-store" } },
-          { type: "video", src: "medias/optic2000-totem-jeunes-actifs.mp4", poster: "medias/optic2000-totem-jeunes-actifs-poster.jpg", caption: { fr: "Totem jeunes actifs", en: "Young professionals totem" } },
-          { type: "video", src: "medias/optic2000-eyezen.mp4", poster: "medias/optic2000-eyezen-poster.jpg", caption: { fr: "Eyezen", en: "Eyezen" } }
+          { type: "video", src: "medias/optic2000-soldes.mp4", caption: { fr: "Campagne Soldes", en: "Sales campaign" } },
+          { type: "video", src: "medias/optic2000-rayban-stories-magasin.mp4", caption: { fr: "Ray-Ban Stories en magasin", en: "Ray-Ban Stories in-store" } },
+          { type: "video", src: "medias/optic2000-totem-jeunes-actifs.mp4", caption: { fr: "Totem jeunes actifs", en: "Young professionals totem" } },
+          { type: "video", src: "medias/optic2000-eyezen.mp4", caption: { fr: "Eyezen", en: "Eyezen" } }
         ]
       },
       {
         label: { fr: "Lissac", en: "Lissac" },
         media: [
-          { type: "image", src: "medias/lissac-news-90-cover.png", caption: { fr: "Lissac News #90", en: "Lissac News #90" } },
-          { type: "image", src: "medias/lissac-news-89.jpg", caption: { fr: "Lissac News #89", en: "Lissac News #89" } },
-          { type: "image", src: "medias/lissac-plaisir-de-lire-kids.jpg", caption: { fr: "Le Savoir-Faire Kids+", en: "Kids+ know-how" } },
-          { type: "image", src: "medias/lissac-audition-bilan-gratuit.jpg", caption: { fr: "Lissac Audition — bilan auditif gratuit", en: "Lissac Audition — free hearing check" } },
-          { type: "image", src: "medias/lissac-club-family-parrainage.jpg", caption: { fr: "Club Lissac Family — parrainage", en: "Lissac Family Club — referral programme" } },
-          { type: "image", src: "medias/lissac-test-vue-famille.jpg", caption: { fr: "Test de vue pour toute la famille", en: "Family eye test" } },
-          { type: "image", src: "medias/lissac-ventes-privees.png", caption: { fr: "Ventes privées Lissac", en: "Lissac private sales" } },
-          { type: "video", src: "medias/lissac-diagnostic-365.mp4", poster: "medias/lissac-diagnostic-365-poster.jpg", caption: { fr: "Le Diagnostic 365 — en savoir plus sur vous", en: "The 365 Diagnostic — getting to know you better" } }
+          { type: "image", src: "medias/lissac-news-90.jpg", caption: { fr: "Lissac News #90", en: "Lissac News #90" } },
+          { type: "image", src: "medias/lissac-news-89.jpg", caption: { fr: "Lissac News #89", en: "Lissac News #89" } }
         ]
       },
       {
         label: { fr: "Audio 2000", en: "Audio 2000" },
         media: [
-          { type: "image", src: "medias/audio2000-frequences-newsletter-noel.jpg", caption: { fr: "Fréquences — newsletter de fin d'année", en: "Fréquences — year-end newsletter" } },
-          { type: "image", src: "medias/audio2000-acouphenes-superhero.jpg", caption: { fr: "Campagne acouphènes & surdité", en: "Tinnitus & hearing loss campaign" } },
-          { type: "video", src: "medias/audio2000-bouchons-anti-bruit.mp4", poster: "medias/audio2000-bouchons-anti-bruit-poster.jpg", caption: { fr: "Bouchons sur-mesure anti-bruit", en: "Custom noise-cancelling earplugs" } }
+          { type: "video", src: "medias/audio2000-bouchons-anti-bruit.mp4", caption: { fr: "Bouchons sur-mesure anti-bruit", en: "Custom noise-cancelling earplugs" } }
         ]
       }
     ]
@@ -506,63 +432,22 @@ const BRANDS = {
     eyebrow: { fr: "MSD / Pfizer", en: "MSD / Pfizer" },
     title: { fr: "Projets pharmaceutiques", en: "Pharmaceutical projects" },
     desc: {
-      fr: "Direction d'une équipe de 5 designers sur des initiatives clés pour MSD et Pfizer chez Purple Agency, avec un haut niveau d'exigence réglementaire et de satisfaction client.",
+      fr: "Direction d'une équipe de 5 designers sur des initiatives clés pour MSD et Pfizer chez Purple Agency, avec un haut niveau d'exigence réglementaire et de satisfaction client.",
       en: "Led a team of 5 designers on key MSD and Pfizer initiatives at Purple Agency, under strict regulatory requirements and high client satisfaction."
     },
     meta: [
       { fr: "Rôle", en: "Role", value: { fr: "Studio Coordinator", en: "Studio Coordinator" } },
       { fr: "Période", en: "Period", value: { fr: "2016", en: "2016" } },
-      { fr: "Agence", en: "Agency", value: { fr: "Purple Agency, Paris", en: "Purple Agency, Paris" } },
-      { fr: "Technique(s)", en: "Technique(s)", value: { fr: "Print", en: "Print" } }
+      { fr: "Agence", en: "Agency", value: { fr: "Purple Agency, Paris", en: "Purple Agency, Paris" } }
     ],
     media: [
-      { type: "image", src: "medias/msd-jni2016-savethedate-lille.jpg", caption: { fr: "Save the date — Journées Nationales d'Infectiologie 2016, Lille", en: "Save the date — 2016 National Infectious Disease Days, Lille" } },
-      { type: "image", src: "medias/msd-savethedate-chirurgien.jpg", caption: { fr: "Save the date — visuel chirurgien", en: "Save the date — surgeon visual" } },
-      { type: "image", src: "medias/msd-engagement-infectiologie-infographie.jpg", caption: { fr: "Infographie — l'engagement de MSD en infectiologie", en: "Infographic — MSD's commitment to infectious diseases" } },
-      { type: "image", src: "medias/msd-jfhod2016-atelier-mici.jpg", caption: { fr: "JFHOD 2016 — atelier déjeuner MICI", en: "JFHOD 2016 — IBD lunch workshop" } },
-      { type: "image", src: "medias/msd-worldibdday2016.jpg", caption: { fr: "World IBD Day 2016 — journée mondiale des MICI", en: "World IBD Day 2016" } },
-      { type: "image", src: "medias/msd-mymici-app.jpg", caption: { fr: "Service myMICI — application patients", en: "myMICI service — patient app" } },
-      { type: "image", src: "medias/msd-isentress-brochure.jpg", caption: { fr: "Brochure ISENTRESS — 30 ans d'engagement dans le VIH", en: "ISENTRESS brochure — 30 years committed to HIV" } },
-      { type: "image", src: "medias/msd-zerbaxa-guide-dosage.jpg", caption: { fr: "ZERBAXA — guide de dosage et d'administration", en: "ZERBAXA — dosing and administration guide" } },
-      { type: "image", src: "medias/msd-invitation-journee-referents-2015.jpg", caption: { fr: "Invitation — Journée Nationale des Référents 2015", en: "Invitation — 2015 National Referents Day" } },
-      { type: "image", src: "medias/msd-jai-pas-la-gale-campagne.jpg", caption: { fr: "Campagne de sensibilisation — « J'ai pas la gale »", en: "Awareness campaign — \"I don't have scabies\"" } }
-    ]
-  },
-  tyleywoodman: {
-    eyebrow: { fr: "Kimberly-Clark", en: "Kimberly-Clark" },
-    title: { fr: "Tyleywoodman", en: "Tyleywoodman" },
-    desc: {
-      fr: "Directeur artistique freelance chez Tyleywoodman, à Leatherhead : gamme de documentation produit KIMTECH pour Kimberly-Clark.",
-      en: "Freelance Art Director at Tyleywoodman, Leatherhead: KIMTECH product documentation range for Kimberly-Clark."
-    },
-    meta: [
-      { fr: "Rôle", en: "Role", value: { fr: "Directeur artistique freelance", en: "Freelance Art Director" } },
-      { fr: "Période", en: "Period", value: { fr: "2009 — 2011", en: "2009 — 2011" } },
-      { fr: "Agence", en: "Agency", value: { fr: "Tyleywoodman, Leatherhead (UK)", en: "Tyleywoodman, Leatherhead (UK)" } },
-      { fr: "Technique(s)", en: "Technique(s)", value: { fr: "Print", en: "Print" } }
-    ],
-    mediaGroups: [
-      {
-        label: { fr: "Kimberly-Clark", en: "Kimberly-Clark" },
-        media: [
-          { type: "image", src: "medias/pfizer-kimtech-scientific-range-cover.jpg", caption: { fr: "Couverture — Gamme KIMTECH Scientific", en: "Cover — KIMTECH Scientific Product Range" } },
-          { type: "image", src: "medias/pfizer-kimtech-gloves-intro.jpg", caption: { fr: "Section Gants — ouverture", en: "Gloves section — opener" } },
-          { type: "image", src: "medias/pfizer-kimtech-latex-gloves-range.jpg", caption: { fr: "Gants latex KIMTECH SCIENCE", en: "KIMTECH SCIENCE latex gloves range" } },
-          { type: "image", src: "medias/pfizer-kimtech-sterling-nitrile-gloves.jpg", caption: { fr: "Gants nitrile KIMTECH PURE G3/G5", en: "KIMTECH PURE G3/G5 nitrile gloves" } },
-          { type: "image", src: "medias/pfizer-kimtech-masks-intro.jpg", caption: { fr: "Section Masques — ouverture", en: "Masks section — opener" } },
-          { type: "image", src: "medias/pfizer-kimtech-masks-veils.jpg", caption: { fr: "Masques & voiles salle blanche KIMTECH PURE", en: "KIMTECH PURE cleanroom masks & veils" } },
-          { type: "image", src: "medias/pfizer-kimtech-protective-apparel-intro.jpg", caption: { fr: "Vêtements de protection — ouverture", en: "Protective apparel — opener" } },
-          { type: "image", src: "medias/pfizer-kleenguard-a71-coverall.jpg", caption: { fr: "Combinaison KLEENGUARD A71", en: "KLEENGUARD A71 coverall" } },
-          { type: "image", src: "medias/pfizer-kimtech-wipers-intro.jpg", caption: { fr: "Section Lingettes — ouverture", en: "Wipers section — opener" } },
-          { type: "image", src: "medias/pfizer-kimtech-cl4-wipers.jpg", caption: { fr: "Lingettes salle blanche KIMTECH PURE CL4", en: "KIMTECH PURE CL4 cleanroom wipers" } },
-          { type: "image", src: "medias/pfizer-kimtech-science-wipers.jpg", caption: { fr: "Lingettes de précision KIMTECH SCIENCE", en: "KIMTECH SCIENCE precision wipers" } }
-        ]
-      }
+      { type: "image", src: "", caption: { fr: "Documentation produit", en: "Product documentation" } },
+      { type: "image", src: "", caption: { fr: "Supports congrès", en: "Conference materials" } }
     ]
   },
   unilever: {
-    eyebrow: { fr: "Unilever — Omo & Surf", en: "Unilever — Omo & Surf" },
-    title: { fr: "Packaging Omo & Surf", en: "Omo & Surf packaging" },
+    eyebrow: { fr: "Unilever — Omo & Surf", en: "Unilever — Omo & Surf" },
+    title: { fr: "Packaging Omo & Surf", en: "Omo & Surf packaging" },
     desc: {
       fr: "Chef de projet packaging pour les marques Omo et Surf, à la croisée des enjeux créatifs et techniques, au sein d'Unilever Europe.",
       en: "Packaging project manager for the Omo and Surf brands at Unilever Europe, balancing creative and technical requirements."
@@ -570,11 +455,11 @@ const BRANDS = {
     meta: [
       { fr: "Rôle", en: "Role", value: { fr: "Art Production Specialist", en: "Art Production Specialist" } },
       { fr: "Période", en: "Period", value: { fr: "2011", en: "2011" } },
-      { fr: "Lieu", en: "Location", value: { fr: "Leatherhead, Royaume-Uni", en: "Leatherhead, UK" } },
-      { fr: "Technique(s)", en: "Technique(s)", value: { fr: "Packaging / Print", en: "Packaging / Print" } }
+      { fr: "Lieu", en: "Location", value: { fr: "Leatherhead, Royaume-Uni", en: "Leatherhead, UK" } }
     ],
     media: [
-      { type: "image", src: "medias/unilever-omo-surf-packaging.png", caption: { fr: "Packaging Persil (Omo) & Surf", en: "Persil (Omo) & Surf packaging" } }
+      { type: "image", src: "", caption: { fr: "Packaging Omo", en: "Omo packaging" } },
+      { type: "image", src: "", caption: { fr: "Packaging Surf", en: "Surf packaging" } }
     ]
   },
   orange: {
@@ -587,135 +472,34 @@ const BRANDS = {
     meta: [
       { fr: "Rôle", en: "Role", value: { fr: "Directeur artistique", en: "Art Director" } },
       { fr: "Période", en: "Period", value: { fr: "2008 — 2009", en: "2008 — 2009" } },
-      { fr: "Agence", en: "Agency", value: { fr: "John Brown Media, Londres", en: "John Brown Media, London" } },
-      { fr: "Technique(s)", en: "Technique(s)", value: { fr: "Print", en: "Print" } }
+      { fr: "Agence", en: "Agency", value: { fr: "John Brown Media, Londres", en: "John Brown Media, London" } }
     ],
     media: [
-      { type: "image", src: "medias/orange-magalogue-cover-jours-monstres.jpg", caption: { fr: "Couverture — « Les jours monstres »", en: "Cover — \"Les jours monstres\"" } },
-      { type: "image", src: "medias/orange-ten-forfaits-mobile.jpg", caption: { fr: "Forfaits Ten by Orange", en: "Ten by Orange plans" } },
-      { type: "image", src: "medias/orange-mobicarte-initial-engagement.jpg", caption: { fr: "Mobicarte & Initial sans engagement", en: "Mobicarte & no-commitment Initial plan" } },
-      { type: "image", src: "medias/orange-net-formule-internet-tv-tel.jpg", caption: { fr: "Offres Net & Formule — internet, TV, téléphone", en: "Net & Formule offers — internet, TV, phone" } },
-      { type: "image", src: "medias/orange-optimale-3h-equipement.jpg", caption: { fr: "Offre Optimale — équipement & téléphonie", en: "Optimale offer — equipment & telephony" } },
-      { type: "image", src: "medias/orange-travel-etranger.jpg", caption: { fr: "Orange Travel — voyager à l'étranger", en: "Orange Travel — travelling abroad" } },
-      { type: "image", src: "medias/orange-environnement-durable.jpg", caption: { fr: "Optons pour un environnement durable", en: "Choosing a sustainable environment" } }
+      { type: "image", src: "", caption: { fr: "Couverture du magalogue", en: "Magalogue cover" } },
+      { type: "image", src: "", caption: { fr: "Double page intérieure", en: "Inside spread" } }
     ]
   },
-  areva: {
-    eyebrow: { fr: "Areva T&D", en: "Areva T&D" },
-    title: { fr: "Areva", en: "Areva" },
+  grandscomptes: {
+    eyebrow: { fr: "Alstom, Areva, Schneider Electric, Kimberly-Clark", en: "Alstom, Areva, Schneider Electric, Kimberly-Clark" },
+    title: { fr: "Grands comptes industriels", en: "Industrial key accounts" },
     desc: {
-      fr: "Conception de supports de communication print multilingues pour Areva, en freelance chez Creative Works.",
-      en: "Designed multilingual print communication materials for Areva, freelancing at Creative Works."
+      fr: "Conception de supports de communication print multilingues pour de grands groupes industriels, en freelance chez Creative Works.",
+      en: "Designed multilingual print communication materials for major industrial groups, freelancing at Creative Works."
     },
     meta: [
       { fr: "Rôle", en: "Role", value: { fr: "Directeur artistique freelance", en: "Freelance Art Director" } },
       { fr: "Période", en: "Period", value: { fr: "2009 — 2011", en: "2009 — 2011" } },
-      { fr: "Agence", en: "Agency", value: { fr: "Creative Works, Epsom (UK)", en: "Creative Works, Epsom (UK)" } },
-      { fr: "Technique(s)", en: "Technique(s)", value: { fr: "Print", en: "Print" } }
+      { fr: "Agence", en: "Agency", value: { fr: "Creative Works, Epsom (UK)", en: "Creative Works, Epsom (UK)" } }
     ],
     media: [
-      { type: "image", src: "medias/areva-it-made-easy.png", caption: { fr: "Brochure « IT Made Easy » — Areva T&D", en: "\"IT Made Easy\" brochure — Areva T&D" } },
-      { type: "image", src: "medias/areva-sustainability-way.png", caption: { fr: "AREVA Way — développement durable", en: "AREVA Way — sustainable development" } }
-    ]
-  },
-  presse: {
-    eyebrow: { fr: "Pressimage / CIPL", en: "Pressimage / CIPL" },
-    title: { fr: "Presse magazines informatique", en: "Computer mobile press" },
-    desc: {
-      fr: "Encadrement d'équipes créatives pour des magazines de jeux vidéo et multimédia chez Pressimage, puis supervision du studio graphique du principal mensuel du marché de la presse informatique chez CIPL, à Luxembourg&nbsp;: mise en pages, couvertures et dossiers achat pour un lectorat de passionnés de tech.",
-      en: "Led creative teams for gaming and multimedia magazine titles at Pressimage, then supervised the graphic studio for the leading monthly title in the computer purchasing press market at CIPL, Luxembourg: layout, covers and buyer's guides for a tech-savvy readership."
-    },
-    meta: [
-      { fr: "Rôle", en: "Role", value: { fr: "Studio Manager magazine", en: "Magazine Studio Manager" } },
-      { fr: "Période", en: "Period", value: { fr: "1994 — 2008", en: "1994 — 2008" } },
-      { fr: "Agence", en: "Agency", value: { fr: "Pressimage, Montreuil / CIPL, Luxembourg", en: "Pressimage, Montreuil / CIPL, Luxembourg" } },
-      { fr: "Technique(s)", en: "Technique(s)", value: { fr: "Print", en: "Print" } }
-    ],
-    mediaGroups: [
-      {
-        label: { fr: "Micro Achat", en: "Micro Achat" },
-        media: [
-          { type: "image", src: "medias/microachat-14-wifi-mesh.jpg", caption: { fr: "Micro Achat n°1 — WiFi Mesh", en: "Micro Achat issue #1 — WiFi Mesh" } },
-          { type: "image", src: "medias/microachat-28-windows2000.jpg", caption: { fr: "Micro Achat n°28 — spécial Windows 2000", en: "Micro Achat issue #28 — Windows 2000 special" } },
-          { type: "image", src: "medias/microachat-40-meilleurs-prix-2000.jpg", caption: { fr: "Micro Achat n°40 — les 2000 meilleurs prix de l'an", en: "Micro Achat issue #40 — the year's 2000 best prices" } }
-        ]
-      },
-      {
-        label: { fr: "Internet-Achat", en: "Internet-Achat" },
-        media: [
-          { type: "image", src: "medias/internetachat-01-novembre2000.jpg", caption: { fr: "Internet-Achat n°1 — novembre 2000", en: "Internet-Achat issue #1 — November 2000" } },
-          { type: "image", src: "medias/internetachat-02-decembre2000.jpg", caption: { fr: "Internet-Achat n°2 — décembre 2000", en: "Internet-Achat issue #2 — December 2000" } }
-        ]
-      },
-      {
-        label: { fr: "CD Loisirs", en: "CD Loisirs" },
-        media: [
-          { type: "image", src: "medias/cdloisirs-hs02-ete1994.jpg", caption: { fr: "CD Loisirs Hors-Série n°2 — été 1994", en: "CD Loisirs Special Issue #2 — summer 1994" } },
-          { type: "image", src: "medias/cdloisirs-03-octobre1994.jpg", caption: { fr: "CD Loisirs n°3 — octobre 1994", en: "CD Loisirs issue #3 — October 1994" } },
-          { type: "image", src: "medias/cdloisirs-04-janvier1996.jpg", caption: { fr: "CD Loisirs n°4 — janvier-février", en: "CD Loisirs issue #4 — January-February" } },
-          { type: "image", src: "medias/cdloisirs-10-septembre1995.jpg", caption: { fr: "CD Loisirs n°10 — septembre 1995", en: "CD Loisirs issue #10 — September 1995" } }
-        ]
-      },
-      {
-        label: { fr: "PC Fun", en: "PC Fun" },
-        media: [
-          { type: "image", src: "medias/pcfun-05-juin1995.jpg", caption: { fr: "PC Fun n°5 — juin 1995", en: "PC Fun issue #5 — June 1995" } },
-          { type: "image", src: "medias/pcfun-06-juillet1995.jpg", caption: { fr: "PC Fun n°6 — juillet 1995", en: "PC Fun issue #6 — July 1995" } },
-          { type: "image", src: "medias/pcfun-07-aout1995.jpg", caption: { fr: "PC Fun n°7 — août/septembre 1995", en: "PC Fun issue #7 — August/September 1995" } }
-        ]
-      },
-      {
-        label: { fr: "Génération 4", en: "Génération 4" },
-        media: [
-          { type: "image", src: "medias/generation4-082-novembre1995.jpg", caption: { fr: "Génération 4 n°82 — novembre 1995", en: "Génération 4 issue #82 — November 1995" } },
-          { type: "image", src: "medias/generation4-093-novembre1996.jpg", caption: { fr: "Génération 4 n°93 — novembre 1996", en: "Génération 4 issue #93 — November 1996" } },
-          { type: "image", src: "medias/generation4-095-janvier1997.jpg", caption: { fr: "Génération 4 n°95 — janvier 1997", en: "Génération 4 issue #95 — January 1997" } }
-        ]
-      },
-      {
-        label: { fr: "Micro Hebdo", en: "Micro Hebdo" },
-        media: [
-          { type: "image", src: "medias/microhebdo-638639-juillet2010.jpg", caption: { fr: "Micro Hebdo n°638-639 — juillet 2010", en: "Micro Hebdo issue #638-639 — July 2010" } },
-          { type: "image", src: "medias/microhebdo-640641-aout2010.jpg", caption: { fr: "Micro Hebdo n°640-641 — juillet/août 2010", en: "Micro Hebdo issue #640-641 — July/August 2010" } },
-          { type: "image", src: "medias/microhebdo-642643-aout2010.jpg", caption: { fr: "Micro Hebdo n°642-643 — août 2010", en: "Micro Hebdo issue #642-643 — August 2010" } },
-          { type: "image", src: "medias/microhebdo-644-aout2010.jpg", caption: { fr: "Micro Hebdo n°644 — août 2010", en: "Micro Hebdo issue #644 — August 2010" } }
-        ]
-      },
-      {
-        label: { fr: "Micro.Direct", en: "Micro.Direct" },
-        media: [
-          { type: "image", src: "medias/micro-direct-cover-n1.jpg", caption: { fr: "Micro.Direct n°1 — couverture de lancement", en: "Micro.Direct issue #1 — launch cover" } }
-        ]
-      },
-      {
-        label: { fr: "What Mobile", en: "What Mobile" },
-        media: [
-          { type: "image", src: "medias/what-mobile-cover-touching-experience.png", caption: { fr: "What Mobile — « A Touching Experience »", en: "What Mobile — \"A Touching Experience\"" } },
-          { type: "image", src: "medias/what-mobile-travel-tips-spread.jpg", caption: { fr: "Double page — conseils voyage & essentiels vacances", en: "Spread — travel tips & holiday essentials" } }
-        ]
-      }
-    ]
-  },
-  malakoff: {
-    eyebrow: { fr: "Malakoff Médéric", en: "Malakoff Médéric" },
-    title: { fr: "Identité digitale & PLV Malakoff Médéric", en: "Malakoff Médéric digital identity & POS" },
-    desc: {
-      fr: "Encadrement d'une équipe créative de 7&nbsp;designers chez Malakoff Médéric&nbsp;: design visuel, PLV, signalétique et identité digitale pour les offres santé, prévoyance, épargne et retraite.",
-      en: "Led a creative team of 7 designers at Malakoff Médéric: visual design, POS displays, signage and digital identity for health, provident, savings and retirement offers."
-    },
-    meta: [
-      { fr: "Rôle", en: "Role", value: { fr: "Studio Manager", en: "Studio Manager" } },
-      { fr: "Période", en: "Period", value: { fr: "2011 — 2012", en: "2011 — 2012" } },
-      { fr: "Agence", en: "Agency", value: { fr: "Malakoff Médéric, Paris", en: "Malakoff Médéric, Paris" } }
-    ],
-    media: [
-      { type: "image", src: "medias/malakoff-sante-demain-entreprise.jpg", caption: { fr: "Campagne entreprise — « La santé de demain c'est maintenant »", en: "Corporate campaign — \"Tomorrow's health starts now\"" } },
-      { type: "image", src: "medias/malakoff-prix-laureats-2011.jpg", caption: { fr: "Prix Malakoff Médéric — Remise des prix 2011", en: "Malakoff Médéric Awards — 2011 ceremony kit" } }
+      { type: "image", src: "", caption: { fr: "Brochure Alstom", en: "Alstom brochure" } },
+      { type: "image", src: "", caption: { fr: "Rapport Areva", en: "Areva report" } },
+      { type: "image", src: "", caption: { fr: "Support Schneider Electric", en: "Schneider Electric material" } }
     ]
   }
 };
 
-const BRAND_ORDER = ["loreal", "optic2000", "pfizer", "unilever", "orange", "areva", "tyleywoodman", "presse", "malakoff"];
+const BRAND_ORDER = ["loreal", "optic2000", "pfizer", "unilever", "orange", "grandscomptes"];
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -762,24 +546,6 @@ function bindLightbox() {
   });
 }
 
-function setupGalleryReveal() {
-  const items = document.querySelectorAll('.gallery-item');
-  if (!items.length) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    items.forEach(item => item.classList.add('in-view'));
-    return;
-  }
-  const revealObserver = new IntersectionObserver((observed) => {
-    observed.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  items.forEach(item => revealObserver.observe(item));
-}
-
 lightboxPrev.addEventListener('click', () => showLightboxItem(currentMediaIndex - 1));
 lightboxNext.addEventListener('click', () => showLightboxItem(currentMediaIndex + 1));
 lightboxClose.addEventListener('click', closeLightbox);
@@ -823,8 +589,7 @@ function render() {
         </div></div>`;
       }
       if (item.type === "video") {
-        const posterAttr = item.poster ? ` poster="${item.poster}"` : "";
-        return `<div class="gallery-item video-item clickable" data-src="${item.src}" data-type="video"><video src="${item.src}"${posterAttr} preload="metadata" muted></video><span class="play-badge" aria-hidden="true"></span></div>`;
+        return `<div class="gallery-item clickable" data-src="${item.src}" data-type="video"><video src="${item.src}" controls></video></div>`;
       }
       return `<div class="gallery-item clickable" data-src="${item.src}" data-type="image"><img src="${item.src}" alt="${item.caption.fr}"></div>`;
     }).join("");
@@ -843,7 +608,6 @@ function render() {
   }
 
   bindLightbox();
-  setupGalleryReveal();
 
   document.getElementById("brand-switch").innerHTML = BRAND_ORDER.map(k => {
     const b = BRANDS[k];
@@ -855,11 +619,6 @@ function render() {
 
   const backLink = document.querySelector('.back');
   if (backLink) backLink.setAttribute('href', `index.html?lang=${lang}`);
-
-  document.querySelectorAll('.mobile-nav a[href^="index.html"]').forEach(a => {
-    const hash = a.getAttribute('href').split('#')[1];
-    a.setAttribute('href', `index.html?lang=${lang}` + (hash ? `#${hash}` : ''));
-  });
 }
 
 // Applique la langue présente dans l'URL (sinon FR par défaut) avant le premier rendu
@@ -887,24 +646,6 @@ buttons.forEach(btn => {
     render();
   });
 });
-
-const menuToggle = document.querySelector('.menu-toggle');
-const mobileNav = document.querySelector('.mobile-nav');
-if (menuToggle && mobileNav) {
-  const closeMenu = () => {
-    mobileNav.classList.remove('open');
-    menuToggle.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  };
-  menuToggle.addEventListener('click', () => {
-    const isOpen = mobileNav.classList.toggle('open');
-    menuToggle.classList.toggle('open', isOpen);
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-}
 </script>
 
 </body>
