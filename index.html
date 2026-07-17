@@ -232,6 +232,12 @@
   .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:start;}
   .about-grid p{color:var(--ink-muted);font-size:17px;margin-bottom:20px;max-width:520px;}
   .about-grid p strong{color:var(--ink);font-weight:500;}
+  .bio-cv-link{margin-top:-6px;}
+  .bio-cv-link a{
+    font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;
+    color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:3px;transition:color .2s, border-color .2s;
+  }
+  .bio-cv-link a:hover{color:var(--ink);border-color:var(--ink);}
 
   .portrait-wrap{
     width:150px;height:150px;position:relative;margin-bottom:32px;
@@ -501,6 +507,10 @@
         <p>
           <span class="fr">En dehors du studio, je restaure de vieilles voitures et motos, je collectionne vinyles, cassettes et objets design du siècle dernier. Cette passion pour redonner vie à des objets anciens nourrit directement ma façon de travailler&nbsp;: chaque projet est une rencontre entre nostalgie et innovation.</span>
           <span class="en">Outside the studio, I restore vintage cars and motorcycles, and collect vinyl records, cassettes and century-old design objects. This passion for bringing old objects back to life feeds directly into how I work: every project is a fusion of nostalgia and innovation.</span>
+        </p>
+        <p class="bio-cv-link">
+          <a class="fr" href="cv/thierry-caplat-cv-fr.pdf" download>Télécharger mon CV →</a>
+          <a class="en" href="cv/thierry-caplat-cv-en.pdf" download>Download my CV →</a>
         </p>
       </div>
       <div>
