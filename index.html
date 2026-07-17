@@ -19,16 +19,19 @@
     --ink-muted: rgba(255,255,255,0.68);
     --accent:#FF5F10;
     --accent-2:#FF8A47;
+    --accent-text:var(--ink);
+    --accent-ink:#0B0B12;
     --line: rgba(255,95,16,0.25);
     --header-fade: rgba(4,36,227,0.8);
   }
   body.lang-en{
     --bg:#37007A;
-    --bg-alt:#2A005E;
+    --bg-alt:#2B0060;
     --ink:#FFFFFF;
     --ink-muted: rgba(255,255,255,0.68);
     --accent:#1CF121;
-    --accent-2:#5CFF60;
+    --accent-2:#6AFF6E;
+    --accent-text:var(--accent);
     --line: rgba(28,241,33,0.25);
     --header-fade: rgba(55,0,122,0.8);
   }
@@ -61,7 +64,7 @@
     z-index:-1;
   }
   header .wrap{display:flex;justify-content:space-between;align-items:center;}
-  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent);}
+  .logo{font-family:'IBM Plex Mono', monospace;font-size:14px;letter-spacing:0.05em;color:var(--accent-text);}
   .logo span{color:var(--ink);}
   nav{display:flex;align-items:center;gap:40px;}
   nav ul{display:flex;gap:36px;list-style:none;font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}
@@ -69,6 +72,28 @@
   nav a:hover, nav a:focus-visible{color:var(--ink);}
   nav a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--accent);transition:width .25s;}
   nav a:hover::after{width:100%;}
+
+  .menu-toggle{
+    display:none;
+    flex-direction:column;justify-content:center;gap:5px;
+    width:32px;height:32px;background:none;border:none;cursor:pointer;padding:0;
+    position:relative;z-index:60;
+  }
+  .menu-toggle span{display:block;width:100%;height:2px;background:var(--ink);transition:transform .25s ease, opacity .25s ease;}
+  .menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-toggle.open span:nth-child(2){opacity:0;}
+  .menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-nav{
+    display:none;
+    position:fixed;inset:0;z-index:49;
+    background:var(--bg);
+    flex-direction:column;align-items:flex-start;justify-content:center;
+    padding:0 32px;
+  }
+  .mobile-nav.open{display:flex;}
+  .mobile-nav ul{list-style:none;display:flex;flex-direction:column;gap:26px;width:100%;}
+  .mobile-nav a{font-family:'Fraunces', serif;font-weight:500;font-size:30px;color:var(--ink);}
 
   .lang-switch{
     font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.06em;
@@ -78,13 +103,41 @@
     background:none;border:none;color:var(--ink-muted);padding:6px 14px;cursor:pointer;
     font-family:inherit;font-size:inherit;letter-spacing:inherit;transition:color .2s, background .2s;
   }
-  .lang-switch button.active{background:var(--accent);color:#FFFFFF;}
+  .lang-switch button.active{background:var(--accent);color:var(--accent-ink);}
 
   .hero{
     min-height:100vh;
     display:flex;flex-direction:column;justify-content:center;
     position:relative;
     padding-top:100px;
+  }
+
+  @keyframes fadeUpIn{
+    from{opacity:0;transform:translateY(18px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .hero .eyebrow, .hero h1, .hero p.lead, .hero .hero-meta, .hero .hero-cta{
+    opacity:0;
+    animation:fadeUpIn .8s cubic-bezier(.22,.68,0,1) forwards;
+  }
+  .hero .eyebrow{animation-delay:.05s;}
+  .hero h1{animation-delay:.2s;}
+  .hero p.lead{animation-delay:.42s;}
+  .hero .hero-meta{animation-delay:.6s;}
+  .hero .hero-cta{animation-delay:.75s;}
+
+  .entry{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity .7s cubic-bezier(.22,.68,0,1), transform .7s cubic-bezier(.22,.68,0,1);
+  }
+  .entry.in-view{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .hero .eyebrow, .hero h1, .hero p.lead, .hero .hero-meta, .hero .hero-cta{
+      opacity:1;animation:none;
+    }
+    .entry{opacity:1;transform:none;transition:none;}
   }
   .groove{
     position:fixed;right:-120px;top:12%;
@@ -132,6 +185,20 @@
   }
   .hero-meta strong{display:block;color:var(--accent);font-family:'Fraunces', serif;font-size:22px;font-weight:500;margin-bottom:4px;}
 
+  .hero-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-top:44px;
+    background:transparent;color:var(--accent);
+    border:1px solid var(--accent);
+    font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;
+    padding:13px 26px;border-radius:30px;
+    position:relative;z-index:1;
+    transition:background .2s ease, color .2s ease, transform .2s ease;
+  }
+  .hero-cta:hover{background:var(--accent);color:var(--accent-ink);transform:translateY(-2px);}
+  .hero-cta .arrow{transition:transform .2s ease;}
+  .hero-cta:hover .arrow{transform:translateX(3px);}
+
   .section-label{
     font-family:'IBM Plex Mono', monospace;
     font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
@@ -151,7 +218,7 @@
   .entry .code{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink);padding-top:4px;}
   .entry .code .years{display:block;color:var(--ink);margin-top:4px;}
   .entry h3{font-family:'Fraunces', serif;font-weight:500;font-size:22px;margin-bottom:4px;color:var(--accent);}
-  .entry .place{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;}
+  .entry .place{font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--accent-text);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;}
   .entry .place .city{color:var(--ink);}
   .entry p{color:var(--ink-muted);font-size:15px;max-width:640px;}
   .entry p .brand{color:var(--accent);font-weight:500;}
@@ -165,6 +232,19 @@
   .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:start;}
   .about-grid p{color:var(--ink-muted);font-size:17px;margin-bottom:20px;max-width:520px;}
   .about-grid p strong{color:var(--ink);font-weight:500;}
+
+  .portrait-wrap{
+    width:150px;height:150px;position:relative;margin-bottom:32px;
+  }
+  .portrait-wrap::before{
+    content:'';position:absolute;top:-8px;left:-8px;right:8px;bottom:8px;
+    border:1px solid var(--line);border-radius:50%;
+  }
+  .portrait{
+    width:150px;height:150px;border-radius:50%;object-fit:cover;
+    border:2px solid var(--accent);
+    display:block;position:relative;
+  }
   .skills-block{margin-bottom:36px;}
   .skills-block h4{font-family:'IBM Plex Mono', monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink);margin-bottom:16px;}
   .skills{list-style:none;display:flex;flex-wrap:wrap;gap:10px;}
@@ -193,11 +273,16 @@
 
   @media (max-width:760px){
     nav ul{display:none;}
+    .menu-toggle{display:flex;}
     .groove{display:none;}
     .entry{grid-template-columns:1fr;gap:6px;}
     .about-grid{grid-template-columns:1fr;gap:48px;}
     .hero-meta{gap:32px;}
     section{padding:80px 0;}
+    header::before{
+      height:110px;
+      background:linear-gradient(to bottom, var(--bg) 0, var(--bg) 52px, transparent 110px);
+    }
   }
 </style>
 </head>
@@ -217,9 +302,21 @@
         <button type="button" class="active" data-lang="fr">FR</button>
         <button type="button" data-lang="en">EN</button>
       </div>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </div>
 </header>
+
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#parcours"><span class="fr">Parcours</span><span class="en">Career</span></a></li>
+    <li><a href="projet.html"><span class="fr">Projets</span><span class="en">Projects</span></a></li>
+    <li><a href="#competences"><span class="fr">Compétences</span><span class="en">Skills</span></a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div>
 
 <section class="hero">
   <div class="groove" aria-hidden="true">
@@ -235,22 +332,26 @@
   </div>
   <div class="wrap">
     <div class="eyebrow">
-      <span class="fr">Studio Manager &amp; Direction artistique</span>
-      <span class="en">Studio Manager &amp; Art Direction</span>
+      <span class="fr">Studio Manager &amp;&nbsp;Direction artistique</span>
+      <span class="en">Studio Manager &amp;&nbsp;Art Direction</span>
     </div>
     <h1>
       <span class="fr">Faire dialoguer<br><em>création</em><br>et production.</span>
       <span class="en">Bridging<br><em>creativity</em><br>and production.</span>
     </h1>
     <p class="lead">
-      <span class="fr">Traffic &amp; Studio Manager certifié UX/UI, basé à Nice. J'encadre des équipes de designers, je fluidifie les workflows agiles et je garantis la cohérence visuelle de projets menés pour L'Oréal, Optic 2000, Pfizer ou Orange.</span>
-      <span class="en">UX/UI-certified Traffic &amp; Studio Manager, based in Nice, France. I lead design teams, streamline agile workflows and safeguard visual consistency on projects for L'Oréal, Optic 2000, Pfizer and Orange.</span>
+      <span class="fr">Traffic &amp;&nbsp;Studio Manager certifié UX/UI. J'encadre des équipes de designers, je fluidifie les workflows agiles et je garantis la cohérence visuelle de projets menés pour L'Oréal, Optic&nbsp;2000, Pfizer ou Orange.</span>
+      <span class="en">UX/UI-certified Traffic &amp;&nbsp;Studio Manager. I lead design teams, streamline agile workflows and safeguard visual consistency on projects for L'Oréal, Optic&nbsp;2000, Pfizer and Orange.</span>
     </p>
     <div class="hero-meta">
       <div><strong>98%</strong><span class="fr">satisfaction client</span><span class="en">client satisfaction</span></div>
       <div><strong>1000+</strong><span class="fr">projets par an</span><span class="en">projects a year</span></div>
       <div><strong>30+</strong><span class="fr">designers encadrés</span><span class="en">designers led</span></div>
     </div>
+    <a class="hero-cta" href="projet.html">
+      <span class="fr">Voir les projets</span><span class="en">See the projects</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>
   </div>
 </section>
 
@@ -265,9 +366,10 @@
         <div>
           <h3>Senior Studio Manager</h3>
           <div class="place">SGXgraphics <span class="city">— Paris</span></div>
-          <p><span class="fr">À la tête d'un studio packaging de 5 designers seniors pour les comptes <span class="brand">L'Oréal</span> (<span class="brand">La Roche-Posay</span>, <span class="brand">Vichy</span>) : plus de 1 000 projets par an et 98 % de satisfaction client.</span>
-          <span class="en">Heading a 5-person packaging studio for <span class="brand">L'Oréal</span> accounts (<span class="brand">La Roche-Posay</span>, <span class="brand">Vichy</span>): over 1,000 projects a year with a 98% client satisfaction score.</span></p>
-          <a class="case-link" href="projet.html?marque=loreal"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
+          <p><span class="fr">À la tête d'un studio packaging de 5&nbsp;designers seniors pour les comptes <span class="brand">L'Oréal</span> (<span class="brand">La Roche-Posay</span>, <span class="brand">Vichy</span>)&nbsp;: plus de 1&nbsp;000 projets par an et 98&nbsp;% de satisfaction client. Rôle de conseil et de service pour la coordination des projets packaging européens de la marque <span class="brand">Le Petit Marseillais</span> (Johnson &amp; Johnson).</span>
+          <span class="en">Heading a 5-person packaging studio for <span class="brand">L'Oréal</span> accounts (<span class="brand">La Roche-Posay</span>, <span class="brand">Vichy</span>): over 1,000 projects a year with a 98% client satisfaction score. Advisory and service role coordinating European packaging projects for the <span class="brand">Le Petit Marseillais</span> brand (Johnson &amp; Johnson).</span></p>
+          <a class="case-link" href="projet.html?marque=loreal"><span class="fr">Voir les visuels L'Oréal →</span><span class="en">See the L'Oréal visuals →</span></a>
+          <a class="case-link" href="projet.html?marque=lepetitmarseillais" style="margin-left:24px;"><span class="fr">Voir les visuels Le Petit Marseillais →</span><span class="en">See the Le Petit Marseillais visuals →</span></a>
         </div>
       </div>
 
@@ -276,8 +378,8 @@
         <div>
           <h3>Traffic Studio Manager</h3>
           <div class="place">Audioptic Trade Services <span class="city">— Clamart</span></div>
-          <p><span class="fr">Pilotage de la production graphique pour <span class="brand">Optic 2000</span>, <span class="brand">Lissac</span> et <span class="brand">Audio 2000</span> : encadrement de 4 designers, plus de 1 000 projets annuels, identité visuelle et campagnes intégrées.</span>
-          <span class="en">Drove graphic production for <span class="brand">Optic 2000</span>, <span class="brand">Lissac</span> and <span class="brand">Audio 2000</span>: managed a team of 4 designers, over 1,000 projects a year, brand identity and integrated campaigns.</span></p>
+          <p><span class="fr">Pilotage de la production graphique pour <span class="brand">Optic&nbsp;2000</span>, <span class="brand">Lissac</span> et <span class="brand">Audio&nbsp;2000</span>&nbsp;: encadrement de 4&nbsp;designers, plus de 1&nbsp;000 projets annuels, identité visuelle et campagnes intégrées.</span>
+          <span class="en">Drove graphic production for <span class="brand">Optic&nbsp;2000</span>, <span class="brand">Lissac</span> and <span class="brand">Audio&nbsp;2000</span>: managed a team of 4 designers, over 1,000 projects a year, brand identity and integrated campaigns.</span></p>
           <a class="case-link" href="projet.html?marque=optic2000"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
@@ -287,7 +389,7 @@
         <div>
           <h3>Studio Coordinator</h3>
           <div class="place">Purple Agency <span class="city">— Paris</span></div>
-          <p><span class="fr">Direction d'une équipe de 5 designers sur des projets pharmaceutiques clés (<span class="brand">MSD</span>, <span class="brand">Pfizer</span>).</span>
+          <p><span class="fr">Direction d'une équipe de 5&nbsp;designers sur des projets pharmaceutiques clés (<span class="brand">MSD</span>, <span class="brand">Pfizer</span>).</span>
           <span class="en">Led a team of 5 designers on key pharmaceutical accounts (<span class="brand">MSD</span>, <span class="brand">Pfizer</span>).</span></p>
           <a class="case-link" href="projet.html?marque=pfizer"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
@@ -298,7 +400,7 @@
         <div>
           <h3>Digital Production Manager</h3>
           <div class="place">CIPE <span class="city">— Port Louis</span></div>
-          <p><span class="fr">Stratégie de publication en ligne (35 000 publications, 2 millions de pages indexées) et encadrement d'une équipe de 10 designers.</span>
+          <p><span class="fr">Stratégie de publication en ligne (35&nbsp;000 publications, 2&nbsp;millions de pages indexées) et encadrement d'une équipe de 10&nbsp;designers.</span>
           <span class="en">Online publishing strategy (35,000 publications, 2 million indexed pages) leading a team of 10 designers.</span></p>
         </div>
       </div>
@@ -308,8 +410,9 @@
         <div>
           <h3>Studio Manager</h3>
           <div class="place">Malakoff Médéric <span class="city">— Paris</span></div>
-          <p><span class="fr">Encadrement d'une équipe créative de 7 designers : design visuel, PLV, signalétique et identité digitale.</span>
+          <p><span class="fr">Encadrement d'une équipe créative de 7&nbsp;designers&nbsp;: design visuel, PLV, signalétique et identité digitale.</span>
           <span class="en">Led a creative team of 7 designers across visual design, POS displays, signage and digital identity.</span></p>
+          <a class="case-link" href="projet.html?marque=malakoff"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
 
@@ -318,8 +421,8 @@
         <div>
           <h3>Art Production Specialist</h3>
           <div class="place">Unilever Europe <span class="city">— Leatherhead (UK)</span></div>
-          <p><span class="fr">Chef de projet packaging pour <span class="brand">Omo</span> &amp; <span class="brand">Surf</span>, à la croisée des enjeux créatifs et techniques.</span>
-          <span class="en">Packaging project manager for <span class="brand">Omo</span> &amp; <span class="brand">Surf</span>, balancing creative and technical requirements.</span></p>
+          <p><span class="fr">Chef de projet packaging pour <span class="brand">Omo</span> &amp;&nbsp;<span class="brand">Surf</span>, à la croisée des enjeux créatifs et techniques.</span>
+          <span class="en">Packaging project manager for <span class="brand">Omo</span> &amp;&nbsp;<span class="brand">Surf</span>, balancing creative and technical requirements.</span></p>
           <a class="case-link" href="projet.html?marque=unilever"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
@@ -329,9 +432,20 @@
         <div>
           <h3><span class="fr">Directeur artistique freelance</span><span class="en">Freelance Art Director</span></h3>
           <div class="place">Creative Works <span class="city">— Epsom (UK)</span></div>
-          <p><span class="fr">Conception de supports de communication print multilingues pour <span class="brand">Alstom</span>, <span class="brand">Areva</span>, <span class="brand">Schneider Electric</span> et <span class="brand">Kimberly-Clark</span>.</span>
-          <span class="en">Designed multilingual print communication materials for <span class="brand">Alstom</span>, <span class="brand">Areva</span>, <span class="brand">Schneider Electric</span> and <span class="brand">Kimberly-Clark</span>.</span></p>
-          <a class="case-link" href="projet.html?marque=grandscomptes"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
+          <p><span class="fr">Conception de supports de communication print multilingues pour <span class="brand">Alstom</span>, <span class="brand">Areva</span> et <span class="brand">Schneider Electric</span>.</span>
+          <span class="en">Designed multilingual print communication materials for <span class="brand">Alstom</span>, <span class="brand">Areva</span> and <span class="brand">Schneider Electric</span>.</span></p>
+          <a class="case-link" href="projet.html?marque=areva"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="code"><span class="years">2009—2011</span></div>
+        <div>
+          <h3><span class="fr">Directeur artistique freelance</span><span class="en">Freelance Art Director</span></h3>
+          <div class="place">Tyleywoodman <span class="city">— Leatherhead (UK)</span></div>
+          <p><span class="fr">Conception de supports de communication pour <span class="brand">Kimberly-Clark</span>.</span>
+          <span class="en">Designed communication materials for <span class="brand">Kimberly-Clark</span>.</span></p>
+          <a class="case-link" href="projet.html?marque=tyleywoodman"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
 
@@ -353,6 +467,7 @@
           <div class="place">CIPL <span class="city">— Luxembourg</span></div>
           <p><span class="fr">Supervision du studio graphique du principal mensuel du marché de la presse informatique.</span>
           <span class="en">Supervised the graphic studio for the leading monthly title in the computer purchasing press market.</span></p>
+          <a class="case-link" href="projet.html?marque=presse"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
 
@@ -363,6 +478,7 @@
           <div class="place">Pressimage <span class="city">— Montreuil</span></div>
           <p><span class="fr">Encadrement d'équipes créatives pour des magazines de jeux vidéo et multimédia, amélioration des techniques éditoriales.</span>
           <span class="en">Led creative teams for gaming and multimedia magazine titles, improving editorial techniques.</span></p>
+          <a class="case-link" href="projet.html?marque=presse"><span class="fr">Voir les visuels →</span><span class="en">See the visuals →</span></a>
         </div>
       </div>
 
@@ -372,21 +488,24 @@
 
 <section id="competences">
   <div class="wrap">
-    <div class="section-label"><span class="fr">À propos &amp; compétences</span><span class="en">About &amp; skills</span><div class="rule"></div></div>
+    <div class="section-label"><span class="fr">À propos &amp;&nbsp;compétences</span><span class="en">About &amp;&nbsp;skills</span><div class="rule"></div></div>
     <div class="about-grid">
       <div>
+        <div class="portrait-wrap">
+          <img class="portrait" src="medias/thierry-caplat-portrait-duotone.jpg" alt="Thierry Caplat">
+        </div>
         <p>
-          <span class="fr">Traffic &amp; Studio Manager certifié UX/UI (Pyramyd, 2024), fort de 15 ans à la tête de studios graphiques pour des marques telles que L'Oréal, Orange, Pfizer et Unilever. Formé en communication et publicité (BTS, CFPJ Paris, LPEP Vincennes), je m'appuie sur cette double culture créative et opérationnelle pour orchestrer des projets exigeants, dans le respect des délais et de l'identité visuelle des marques.</span>
-          <span class="en">UX/UI-certified Traffic &amp; Studio Manager (Pyramyd, 2024), with 15 years leading graphic studios for brands including L'Oréal, Orange, Pfizer and Unilever. Trained in communication and advertising (BTS, CFPJ Paris, LPEP Vincennes), I bring together creative and operational thinking to run demanding projects on time, without compromising brand identity.</span>
+          <span class="fr">Traffic &amp;&nbsp;Studio Manager certifié UX/UI (Pyramyd, 2024), fort de 15&nbsp;ans à la tête de studios graphiques pour des marques telles que L'Oréal, Orange, Pfizer et Unilever. Formé en communication et publicité (BTS, CFPJ Paris, LPEP Vincennes), je m'appuie sur cette double culture créative et opérationnelle pour orchestrer des projets exigeants, dans le respect des délais et de l'identité visuelle des marques.</span>
+          <span class="en">UX/UI-certified Traffic &amp;&nbsp;Studio Manager (Pyramyd, 2024), with 15 years leading graphic studios for brands including L'Oréal, Orange, Pfizer and Unilever. Trained in communication and advertising (BTS, CFPJ Paris, LPEP Vincennes), I bring together creative and operational thinking to run demanding projects on time, without compromising brand identity.</span>
         </p>
         <p>
-          <span class="fr">En dehors du studio, je restaure de vieilles voitures et motos, je collectionne vinyles, cassettes et objets design du siècle dernier. Cette passion pour redonner vie à des objets anciens nourrit directement ma façon de travailler : chaque projet est une rencontre entre nostalgie et innovation.</span>
+          <span class="fr">En dehors du studio, je restaure de vieilles voitures et motos, je collectionne vinyles, cassettes et objets design du siècle dernier. Cette passion pour redonner vie à des objets anciens nourrit directement ma façon de travailler&nbsp;: chaque projet est une rencontre entre nostalgie et innovation.</span>
           <span class="en">Outside the studio, I restore vintage cars and motorcycles, and collect vinyl records, cassettes and century-old design objects. This passion for bringing old objects back to life feeds directly into how I work: every project is a fusion of nostalgia and innovation.</span>
         </p>
       </div>
       <div>
         <div class="skills-block">
-          <h4><span class="fr">Compétences clés</span><span class="en">Core skills</span></h4>
+          <h4><span class="fr">Compétences</span><span class="en">Skills</span></h4>
           <ul class="skills">
             <li><span class="fr">Planning / Traffic / Production</span><span class="en">Planning / Traffic / Production</span></li>
             <li><span class="fr">Design graphique</span><span class="en">Graphic design</span></li>
@@ -394,6 +513,7 @@
             <li>Adobe Acrobat Pro</li>
             <li>Figma</li>
             <li>Office 365</li>
+            <li><span class="fr">Workflow Esko</span><span class="en">Esko workflow</span></li>
             <li><span class="fr">IA générative</span><span class="en">Generative AI</span></li>
           </ul>
         </div>
@@ -427,7 +547,7 @@
   <div class="wrap contact">
     <div class="contact-inner">
       <h2>
-        <span class="fr">Un projet à orchestrer ?<br>Parlons-en.</span>
+        <span class="fr">Un projet à orchestrer&nbsp;?<br>Parlons-en.</span>
         <span class="en">A project to run?<br>Let's talk.</span>
       </h2>
       <div class="contact-links">
@@ -449,6 +569,23 @@
   const groove = document.querySelector('.groove');
   const rings = document.querySelectorAll('.groove .ring');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const entries = document.querySelectorAll('.entry');
+  if (entries.length) {
+    if (prefersReducedMotion) {
+      entries.forEach(entry => entry.classList.add('in-view'));
+    } else {
+      const revealObserver = new IntersectionObserver((observed) => {
+        observed.forEach(item => {
+          if (item.isIntersecting) {
+            item.target.classList.add('in-view');
+            revealObserver.unobserve(item.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      entries.forEach(entry => revealObserver.observe(entry));
+    }
+  }
 
   if (groove && rings.length && !prefersReducedMotion) {
     let ticking = false;
@@ -513,6 +650,24 @@
       window.history.replaceState({}, '', url);
     });
   });
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
+  if (menuToggle && mobileNav) {
+    const closeMenu = () => {
+      mobileNav.classList.remove('open');
+      menuToggle.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  }
 </script>
 
 </body>
