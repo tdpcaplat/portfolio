@@ -123,8 +123,8 @@
   .hero .eyebrow{animation-delay:.05s;}
   .hero h1{animation-delay:.2s;}
   .hero p.lead{animation-delay:.38s;}
-  .hero .hero-status{animation-delay:.5s;}
-  .hero .hero-meta{animation-delay:.62s;}
+  .hero .hero-meta{animation-delay:.5s;}
+  .hero .hero-status{animation-delay:.62s;}
   .hero .hero-gallery{animation-delay:.72s;}
   .hero .hero-cta{animation-delay:.85s;}
 
@@ -202,26 +202,42 @@
   .hero-cta:hover .arrow{transform:translateX(3px);}
 
   .hero-status{
-    display:inline-flex;align-items:center;gap:10px;
-    margin-top:22px;
-    font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.04em;
-    color:var(--ink);
-    border:1px solid var(--line);border-radius:20px;
-    padding:9px 18px;
+    margin-top:28px;
+    font-family:'Work Sans', sans-serif;font-weight:300;
+    font-size:17px;
+    color:var(--ink-muted);
     position:relative;z-index:1;
   }
-  .hero-status .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;}
 
   .hero-gallery{
-    display:flex;gap:16px;margin-top:40px;position:relative;z-index:1;flex-wrap:wrap;
+    display:flex;gap:16px;margin-top:18px;position:relative;z-index:1;flex-wrap:wrap;
   }
   .hero-gallery a{
     display:block;width:180px;height:135px;border-radius:8px;overflow:hidden;
     border:1px solid var(--line);
+    position:relative;
     transition:transform .2s ease, border-color .2s ease;
   }
   .hero-gallery a:hover{transform:translateY(-3px);border-color:var(--accent);}
-  .hero-gallery img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hero-gallery img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:filter .35s ease;
+  }
+  .hero-gallery a:hover img{
+    filter:sepia(1) saturate(280%) hue-rotate(178deg) brightness(0.4) contrast(1.15);
+  }
+  .gallery-label{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:10px;
+    font-family:'IBM Plex Mono', monospace;font-size:13px;font-weight:500;
+    text-transform:uppercase;letter-spacing:0.06em;
+    color:var(--accent);
+    opacity:0;
+    transition:opacity .35s ease;
+    pointer-events:none;
+  }
+  .hero-gallery a:hover .gallery-label{opacity:1;}
 
   .section-label{
     font-family:'IBM Plex Mono', monospace;
@@ -309,7 +325,7 @@
     .about-grid{grid-template-columns:1fr;gap:48px;}
     .hero-meta{gap:32px;}
     .hero-gallery a{width:130px;height:98px;}
-    .hero-status{font-size:11px;padding:8px 14px;}
+    .hero-status{font-size:15px;}
     section{padding:80px 0;}
     header::before{
       height:110px;
@@ -375,21 +391,20 @@
       <span class="fr">Traffic &amp;&nbsp;Studio Manager certifié UX/UI. J'encadre des équipes de designers, je fluidifie les workflows agiles et je garantis la cohérence visuelle de projets menés pour <span class="brand">L'Oréal</span>, <span class="brand">Johnson &amp; Johnson</span>, <span class="brand">Optic&nbsp;2000</span>, <span class="brand">Pfizer</span> ou <span class="brand">Orange</span>.</span>
       <span class="en">UX/UI-certified Traffic &amp;&nbsp;Studio Manager. I lead design teams, streamline agile workflows and safeguard visual consistency on projects for <span class="brand">L'Oréal</span>, <span class="brand">Johnson &amp; Johnson</span>, <span class="brand">Optic&nbsp;2000</span>, <span class="brand">Pfizer</span> and <span class="brand">Orange</span>.</span>
     </p>
-    <div class="hero-status">
-      <span class="dot" aria-hidden="true"></span>
-      <span class="fr">15&nbsp;ans à la tête de studios graphiques pour de grandes marques</span>
-      <span class="en">15 years leading graphic studios for major brands</span>
-    </div>
     <div class="hero-meta">
       <div><strong>98%</strong><span class="fr">satisfaction client</span><span class="en">client satisfaction</span></div>
       <div><strong>1000+</strong><span class="fr">projets par an</span><span class="en">projects a year</span></div>
       <div><strong>30+</strong><span class="fr">designers encadrés</span><span class="en">designers led</span></div>
     </div>
+    <div class="hero-status">
+      <span class="fr">15&nbsp;ans à la tête de studios graphiques pour de grandes marques</span>
+      <span class="en">15 years leading graphic studios for major brands</span>
+    </div>
     <div class="hero-gallery" aria-hidden="false">
-      <a href="projet.html?marque=loreal"><img src="medias/lrp-serums-gamme.jpg" alt="La Roche-Posay — Gamme sérums" loading="lazy"></a>
-      <a href="projet.html?marque=loreal"><img src="medias/vichy-mineral89-night-cream.jpg" alt="Vichy — Minéral 89" loading="lazy"></a>
-      <a href="projet.html?marque=lepetitmarseillais"><img src="medias/lepetitmarseillais-gamme-bio-point-de-vente.jpg" alt="Le Petit Marseillais — gamme Bio" loading="lazy"></a>
-      <a href="projet.html?marque=optic2000"><img src="medias/optic2000-2eme-paire-sport_recadre.jpg" alt="Optic 2000 — 2ème paire Sport" loading="lazy"></a>
+      <a href="projet.html?marque=loreal" class="gallery-item"><img src="medias/lrp-serums-gamme.jpg" alt="La Roche-Posay — Gamme sérums" loading="lazy"><span class="gallery-label">La Roche-Posay</span></a>
+      <a href="projet.html?marque=loreal" class="gallery-item"><img src="medias/vichy-mineral89-night-cream.jpg" alt="Vichy — Minéral 89" loading="lazy"><span class="gallery-label">Vichy</span></a>
+      <a href="projet.html?marque=lepetitmarseillais" class="gallery-item"><img src="medias/lepetitmarseillais-gamme-bio-point-de-vente.jpg" alt="Le Petit Marseillais — gamme Bio" loading="lazy"><span class="gallery-label">Le Petit Marseillais</span></a>
+      <a href="projet.html?marque=optic2000" class="gallery-item"><img src="medias/optic2000-2eme-paire-sport_recadre.jpg" alt="Optic 2000 — 2ème paire Sport" loading="lazy"><span class="gallery-label">Optic 2000</span></a>
     </div>
     <a class="hero-cta" href="projet.html">
       <span class="fr">Voir les projets</span><span class="en">See the projects</span>
