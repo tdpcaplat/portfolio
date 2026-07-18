@@ -116,15 +116,17 @@
     from{opacity:0;transform:translateY(18px);}
     to{opacity:1;transform:translateY(0);}
   }
-  .hero .eyebrow, .hero h1, .hero p.lead, .hero .hero-meta, .hero .hero-cta{
+  .hero .eyebrow, .hero h1, .hero p.lead, .hero .hero-status, .hero .hero-meta, .hero .hero-gallery, .hero .hero-cta{
     opacity:0;
     animation:fadeUpIn .8s cubic-bezier(.22,.68,0,1) forwards;
   }
   .hero .eyebrow{animation-delay:.05s;}
   .hero h1{animation-delay:.2s;}
-  .hero p.lead{animation-delay:.42s;}
-  .hero .hero-meta{animation-delay:.6s;}
-  .hero .hero-cta{animation-delay:.75s;}
+  .hero p.lead{animation-delay:.38s;}
+  .hero .hero-status{animation-delay:.5s;}
+  .hero .hero-meta{animation-delay:.62s;}
+  .hero .hero-gallery{animation-delay:.72s;}
+  .hero .hero-cta{animation-delay:.85s;}
 
   .entry{
     opacity:0;
@@ -198,6 +200,28 @@
   .hero-cta:hover{background:var(--accent);color:var(--accent-ink);transform:translateY(-2px);}
   .hero-cta .arrow{transition:transform .2s ease;}
   .hero-cta:hover .arrow{transform:translateX(3px);}
+
+  .hero-status{
+    display:inline-flex;align-items:center;gap:10px;
+    margin-top:22px;
+    font-family:'IBM Plex Mono', monospace;font-size:12px;letter-spacing:0.04em;
+    color:var(--ink);
+    border:1px solid var(--line);border-radius:20px;
+    padding:9px 18px;
+    position:relative;z-index:1;
+  }
+  .hero-status .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+
+  .hero-gallery{
+    display:flex;gap:16px;margin-top:40px;position:relative;z-index:1;flex-wrap:wrap;
+  }
+  .hero-gallery a{
+    display:block;width:180px;height:135px;border-radius:8px;overflow:hidden;
+    border:1px solid var(--line);
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .hero-gallery a:hover{transform:translateY(-3px);border-color:var(--accent);}
+  .hero-gallery img{width:100%;height:100%;object-fit:cover;display:block;}
 
   .section-label{
     font-family:'IBM Plex Mono', monospace;
@@ -284,6 +308,8 @@
     .entry{grid-template-columns:1fr;gap:6px;}
     .about-grid{grid-template-columns:1fr;gap:48px;}
     .hero-meta{gap:32px;}
+    .hero-gallery a{width:130px;height:98px;}
+    .hero-status{font-size:11px;padding:8px 14px;}
     section{padding:80px 0;}
     header::before{
       height:110px;
@@ -349,10 +375,21 @@
       <span class="fr">Traffic &amp;&nbsp;Studio Manager certifié UX/UI. J'encadre des équipes de designers, je fluidifie les workflows agiles et je garantis la cohérence visuelle de projets menés pour <span class="brand">L'Oréal</span>, <span class="brand">Johnson &amp; Johnson</span>, <span class="brand">Optic&nbsp;2000</span>, <span class="brand">Pfizer</span> ou <span class="brand">Orange</span>.</span>
       <span class="en">UX/UI-certified Traffic &amp;&nbsp;Studio Manager. I lead design teams, streamline agile workflows and safeguard visual consistency on projects for <span class="brand">L'Oréal</span>, <span class="brand">Johnson &amp; Johnson</span>, <span class="brand">Optic&nbsp;2000</span>, <span class="brand">Pfizer</span> and <span class="brand">Orange</span>.</span>
     </p>
+    <div class="hero-status">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="fr">15&nbsp;ans à la tête de studios graphiques pour de grandes marques</span>
+      <span class="en">15 years leading creative studios for major brands</span>
+    </div>
     <div class="hero-meta">
       <div><strong>98%</strong><span class="fr">satisfaction client</span><span class="en">client satisfaction</span></div>
       <div><strong>1000+</strong><span class="fr">projets par an</span><span class="en">projects a year</span></div>
       <div><strong>30+</strong><span class="fr">designers encadrés</span><span class="en">designers led</span></div>
+    </div>
+    <div class="hero-gallery" aria-hidden="false">
+      <a href="projet.html?marque=loreal"><img src="medias/lrp-serums-gamme.jpg" alt="La Roche-Posay — Gamme sérums" loading="lazy"></a>
+      <a href="projet.html?marque=loreal"><img src="medias/vichy-mineral89-night-cream.jpg" alt="Vichy — Minéral 89" loading="lazy"></a>
+      <a href="projet.html?marque=lepetitmarseillais"><img src="medias/lepetitmarseillais-gamme-bio-point-de-vente.jpg" alt="Le Petit Marseillais — gamme Bio" loading="lazy"></a>
+      <a href="projet.html?marque=optic2000"><img src="medias/optic2000-2eme-paire-sport_recadre.jpg" alt="Optic 2000 — 2ème paire Sport" loading="lazy"></a>
     </div>
     <a class="hero-cta" href="projet.html">
       <span class="fr">Voir les projets</span><span class="en">See the projects</span>
@@ -678,6 +715,33 @@
     });
     mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   }
+  (function(){
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const counters = document.querySelectorAll('.hero-meta strong');
+    if(!counters.length || prefersReducedMotion) return;
+
+    counters.forEach(el => {
+      const raw = el.textContent.trim();
+      const match = raw.match(/^(\d+)(.*)$/);
+      if(!match) return;
+      const target = parseInt(match[1], 10);
+      const suffix = match[2];
+      el.textContent = '0' + suffix;
+
+      setTimeout(() => {
+        const duration = 1100;
+        let startTime = null;
+        function step(ts){
+          if(!startTime) startTime = ts;
+          const progress = Math.min((ts - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if(progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }, 900);
+    });
+  })();
 </script>
 
 </body>
